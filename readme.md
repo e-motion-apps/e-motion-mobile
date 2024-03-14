@@ -2,14 +2,14 @@
 
 ### Local development
 
-Download necessary dependencies (packages):
-```shell
-flutter pub get
-```
-
 Check flutter installation:
 ```shell
 flutter doctor
+```
+
+Download necessary dependencies (packages):
+```shell
+flutter pub get
 ```
 
 To start the project run:
