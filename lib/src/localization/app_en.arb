@@ -1,0 +1,6 @@
+{
+  "appTitle": "emotion_ios",
+  "@appTitle": {
+    "description": "The title of the application"
+  }
+}
