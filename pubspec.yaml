@@ -4,9 +4,6 @@ description: "An app that helps you to find the best way to get around your city
 # Prevent accidental publishing to pub.dev.
 publish_to: 'none'
 
-#remove debug label
-
-
 version: 1.0.0+1
 
 environment:
@@ -25,6 +22,9 @@ dependencies:
   floor: ^1.4.2
   retrofit: ^4.1.0
   flutter_hooks: ^0.20.5
+  rxdart: ^0.27.7
+  dartz: ^0.10.1
+  
 
 dev_dependencies:
   flutter_test:
@@ -33,9 +33,19 @@ dev_dependencies:
   retrofit_generator: ^8.1.0
   floor_generator: ^1.4.2
   build_runner: ^2.4.9
+  bloc_test: ^9.1.7
+  mockito: ^5.4.4
+  mocktail: ^1.0.3
 
 flutter:
   uses-material-design: true
+
+  fonts:
+  - family: Helvetica-Neue
+    fonts:
+      - asset: assets/fonts/helvetica-neue/HelveticaNeue.ttf
+      - asset: assets/fonts/helvetica-neue/HelveticaNeue-Bold.ttf
+        weight: 700
 
   # Enable generation of localized Strings from arb files.
   generate: true
