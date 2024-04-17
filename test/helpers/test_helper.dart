@@ -1,3 +1,4 @@
+import 'package:emotion/src/features/auth/domain/repository/user_repository.dart';
 import 'package:emotion/src/features/city_details/domain/repository/city_provider_repository.dart';
 import 'package:emotion/src/features/city_details/domain/repository/country_repository.dart';
 import 'package:mockito/annotations.dart';
@@ -8,6 +9,7 @@ import 'package:http/http.dart' as http;
   CityRepository,
   CountryRepository,
   CityProviderRepository,
+  UserRepository,
   ],
   customMocks: [
     MockSpec <http.Client>(as: #MockHttpClient),

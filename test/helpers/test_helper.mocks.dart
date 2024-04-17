@@ -4,11 +4,14 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i5;
-import 'dart:convert' as _i12;
-import 'dart:typed_data' as _i14;
+import 'dart:convert' as _i14;
+import 'dart:typed_data' as _i16;
 
 import 'package:dartz/dartz.dart' as _i2;
 import 'package:emotion/src/core/error/failure.dart' as _i6;
+import 'package:emotion/src/features/auth/domain/entities/user.dart' as _i13;
+import 'package:emotion/src/features/auth/domain/repository/user_repository.dart'
+    as _i12;
 import 'package:emotion/src/features/city_details/domain/entities/city.dart'
     as _i7;
 import 'package:emotion/src/features/city_details/domain/entities/city_provider.dart'
@@ -23,7 +26,7 @@ import 'package:emotion/src/features/city_details/domain/repository/country_repo
     as _i8;
 import 'package:http/http.dart' as _i3;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i13;
+import 'package:mockito/src/dummies.dart' as _i15;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -150,6 +153,87 @@ class MockCityProviderRepository extends _i1.Mock
       ) as _i5.Future<_i2.Either<_i6.Failure, _i11.CityProvider>>);
 }
 
+/// A class which mocks [UserRepository].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUserRepository extends _i1.Mock implements _i12.UserRepository {
+  MockUserRepository() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i5.Future<_i2.Either<_i6.Failure, _i13.User>> registerUser(
+    String? name,
+    String? email,
+    String? password,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #registerUser,
+          [
+            name,
+            email,
+            password,
+          ],
+        ),
+        returnValue: _i5.Future<_i2.Either<_i6.Failure, _i13.User>>.value(
+            _FakeEither_0<_i6.Failure, _i13.User>(
+          this,
+          Invocation.method(
+            #registerUser,
+            [
+              name,
+              email,
+              password,
+            ],
+          ),
+        )),
+      ) as _i5.Future<_i2.Either<_i6.Failure, _i13.User>>);
+
+  @override
+  _i5.Future<_i2.Either<_i6.Failure, _i13.User>> loginUser(
+    String? email,
+    String? password,
+  ) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #loginUser,
+          [
+            email,
+            password,
+          ],
+        ),
+        returnValue: _i5.Future<_i2.Either<_i6.Failure, _i13.User>>.value(
+            _FakeEither_0<_i6.Failure, _i13.User>(
+          this,
+          Invocation.method(
+            #loginUser,
+            [
+              email,
+              password,
+            ],
+          ),
+        )),
+      ) as _i5.Future<_i2.Either<_i6.Failure, _i13.User>>);
+
+  @override
+  _i5.Future<_i2.Either<_i6.Failure, _i13.User>> logoutUser() =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #logoutUser,
+          [],
+        ),
+        returnValue: _i5.Future<_i2.Either<_i6.Failure, _i13.User>>.value(
+            _FakeEither_0<_i6.Failure, _i13.User>(
+          this,
+          Invocation.method(
+            #logoutUser,
+            [],
+          ),
+        )),
+      ) as _i5.Future<_i2.Either<_i6.Failure, _i13.User>>);
+}
+
 /// A class which mocks [Client].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -205,7 +289,7 @@ class MockHttpClient extends _i1.Mock implements _i3.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i12.Encoding? encoding,
+    _i14.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -236,7 +320,7 @@ class MockHttpClient extends _i1.Mock implements _i3.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i12.Encoding? encoding,
+    _i14.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -267,7 +351,7 @@ class MockHttpClient extends _i1.Mock implements _i3.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i12.Encoding? encoding,
+    _i14.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -298,7 +382,7 @@ class MockHttpClient extends _i1.Mock implements _i3.Client {
     Uri? url, {
     Map<String, String>? headers,
     Object? body,
-    _i12.Encoding? encoding,
+    _i14.Encoding? encoding,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -335,7 +419,7 @@ class MockHttpClient extends _i1.Mock implements _i3.Client {
           [url],
           {#headers: headers},
         ),
-        returnValue: _i5.Future<String>.value(_i13.dummyValue<String>(
+        returnValue: _i5.Future<String>.value(_i15.dummyValue<String>(
           this,
           Invocation.method(
             #read,
@@ -346,7 +430,7 @@ class MockHttpClient extends _i1.Mock implements _i3.Client {
       ) as _i5.Future<String>);
 
   @override
-  _i5.Future<_i14.Uint8List> readBytes(
+  _i5.Future<_i16.Uint8List> readBytes(
     Uri? url, {
     Map<String, String>? headers,
   }) =>
@@ -356,8 +440,8 @@ class MockHttpClient extends _i1.Mock implements _i3.Client {
           [url],
           {#headers: headers},
         ),
-        returnValue: _i5.Future<_i14.Uint8List>.value(_i14.Uint8List(0)),
-      ) as _i5.Future<_i14.Uint8List>);
+        returnValue: _i5.Future<_i16.Uint8List>.value(_i16.Uint8List(0)),
+      ) as _i5.Future<_i16.Uint8List>);
 
   @override
   _i5.Future<_i3.StreamedResponse> send(_i3.BaseRequest? request) =>
