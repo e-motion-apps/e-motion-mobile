@@ -8,6 +8,8 @@ class City extends Equatable {
   final String slug;
   final String latitude;
   final String longitude;
+  // ignore: non_constant_identifier_names
+  final List<dynamic> city_alternative_names;
   final List<CityProvider> cityProviders;
   final Country country;
   final List<dynamic> cityOpinions;
@@ -18,6 +20,8 @@ class City extends Equatable {
     required this.slug,
     required this.latitude,
     required this.longitude,
+    // ignore: non_constant_identifier_names
+    required this.city_alternative_names,
     required this.cityProviders,
     required this.country,
     required this.cityOpinions,
