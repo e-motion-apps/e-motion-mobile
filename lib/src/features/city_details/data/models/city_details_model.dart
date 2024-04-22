@@ -1,11 +1,12 @@
-class city_details_model {
+class CityDetailsModel {
   City? city;
   List<Providers>? providers;
   List<CityOpinions>? cityOpinions;
+  Country? country;
 
-  city_details_model({this.city, this.providers, this.cityOpinions});
+  CityDetailsModel({this.city, this.country});
 
-  city_details_model.fromJson(Map<String, dynamic> json) {
+  CityDetailsModel.fromJson(Map<String, dynamic> json) {
     city = json['city'] != null ? new City.fromJson(json['city']) : null;
     if (json['providers'] != null) {
       providers = <Providers>[];
