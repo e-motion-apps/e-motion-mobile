@@ -6,15 +6,15 @@ abstract class CityDetailsRemoteDataSource {
 }
 
 class CityDetailsRemoteDataSourceImpl extends CityDetailsRemoteDataSource {
-  final http.Client client;
+  final http.Client client; 
 
   CityDetailsRemoteDataSourceImpl({required this.client});
 
   @override
   Future<CityDetailsModel> getCityDetails(String cityName, String countryName) async {
     final response = await client.get(
-      Uri.parse('https://dev.escooters.blumil.pl/api/$countryName/$cityName')
+      Uri.parse('https://dev.escooters.blumilk.pl/api/$countryName/$cityName')
       );
-      return response;
+    return response;
   }
 }
