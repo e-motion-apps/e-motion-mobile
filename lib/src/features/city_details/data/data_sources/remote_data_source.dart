@@ -1,5 +1,6 @@
 import 'package:emotion/src/features/city_details/data/models/city_details_model.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
+
 
 abstract class CityDetailsRemoteDataSource {
   Future<CityDetailsModel> getCityDetails(String cityName, String countryName);
@@ -15,6 +16,10 @@ class CityDetailsRemoteDataSourceImpl extends CityDetailsRemoteDataSource {
     final response = await client.get(
       Uri.parse('https://dev.escooters.blumilk.pl/api/$countryName/$cityName')
       );
-    return response;
+    if (response.statusCode == 200) {
+      return CityDetailsModel.fromJson(response.body);
+    } else {
+      throw Exception();
+    }
   }
 }

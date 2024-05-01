@@ -7,31 +7,31 @@ class CityDetailsModel {
   CityDetailsModel({this.city, this.country});
 
   CityDetailsModel.fromJson(Map<String, dynamic> json) {
-    city = json['city'] != null ? new City.fromJson(json['city']) : null;
+    city = json['city'] != null ? City.fromJson(json['city']) : null;
     if (json['providers'] != null) {
       providers = <Providers>[];
       json['providers'].forEach((v) {
-        providers!.add(new Providers.fromJson(v));
+        providers!.add(Providers.fromJson(v));
       });
     }
     if (json['cityOpinions'] != null) {
       cityOpinions = <CityOpinions>[];
       json['cityOpinions'].forEach((v) {
-        cityOpinions!.add(new CityOpinions.fromJson(v));
+        cityOpinions!.add(CityOpinions.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.city != null) {
-      data['city'] = this.city!.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (city != null) {
+      data['city'] = city!.toJson();
     }
-    if (this.providers != null) {
-      data['providers'] = this.providers!.map((v) => v.toJson()).toList();
+    if (providers != null) {
+      data['providers'] = providers!.map((v) => v.toJson()).toList();
     }
-    if (this.cityOpinions != null) {
-      data['cityOpinions'] = this.cityOpinions!.map((v) => v.toJson()).toList();
+    if (cityOpinions != null) {
+      data['cityOpinions'] = cityOpinions!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -68,45 +68,45 @@ class City {
     if (json['city_alternative_names'] != null) {
       cityAlternativeNames = <CityAlternativeNames>[];
       json['city_alternative_names'].forEach((v) {
-        cityAlternativeNames!.add(new CityAlternativeNames.fromJson(v));
+        cityAlternativeNames!.add(CityAlternativeNames.fromJson(v));
       });
     }
     if (json['cityProviders'] != null) {
       cityProviders = <CityProviders>[];
       json['cityProviders'].forEach((v) {
-        cityProviders!.add(new CityProviders.fromJson(v));
+        cityProviders!.add(CityProviders.fromJson(v));
       });
     }
     country =
-        json['country'] != null ? new Country.fromJson(json['country']) : null;
+        json['country'] != null ? Country.fromJson(json['country']) : null;
     if (json['cityOpinions'] != null) {
       cityOpinions = <CityOpinions>[];
       json['cityOpinions'].forEach((v) {
-        cityOpinions!.add(new CityOpinions.fromJson(v));
+        cityOpinions!.add(CityOpinions.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['slug'] = this.slug;
-    data['latitude'] = this.latitude;
-    data['longitude'] = this.longitude;
-    if (this.cityAlternativeNames != null) {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['slug'] = slug;
+    data['latitude'] = latitude;
+    data['longitude'] = longitude;
+    if (cityAlternativeNames != null) {
       data['city_alternative_names'] =
-          this.cityAlternativeNames!.map((v) => v.toJson()).toList();
+          cityAlternativeNames!.map((v) => v.toJson()).toList();
     }
-    if (this.cityProviders != null) {
+    if (cityProviders != null) {
       data['cityProviders'] =
-          this.cityProviders!.map((v) => v.toJson()).toList();
+          cityProviders!.map((v) => v.toJson()).toList();
     }
-    if (this.country != null) {
-      data['country'] = this.country!.toJson();
+    if (country != null) {
+      data['country'] = country!.toJson();
     }
-    if (this.cityOpinions != null) {
-      data['cityOpinions'] = this.cityOpinions!.map((v) => v.toJson()).toList();
+    if (cityOpinions != null) {
+      data['cityOpinions'] = cityOpinions!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -131,12 +131,12 @@ class CityAlternativeNames {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['city_id'] = this.cityId;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['city_id'] = cityId;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
@@ -167,13 +167,13 @@ class CityProviders {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['provider_name'] = this.providerName;
-    data['city_id'] = this.cityId;
-    data['created_by'] = this.createdBy;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['provider_name'] = providerName;
+    data['city_id'] = cityId;
+    data['created_by'] = createdBy;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
@@ -213,16 +213,16 @@ class Country {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['slug'] = this.slug;
-    data['alternative_name'] = this.alternativeName;
-    data['latitude'] = this.latitude;
-    data['longitude'] = this.longitude;
-    data['iso'] = this.iso;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['slug'] = slug;
+    data['alternative_name'] = alternativeName;
+    data['latitude'] = latitude;
+    data['longitude'] = longitude;
+    data['iso'] = iso;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
@@ -256,14 +256,14 @@ class CityOpinions {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['content'] = this.content;
-    data['rating'] = this.rating;
-    data['city_id'] = this.cityId;
-    data['user_id'] = this.userId;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['content'] = content;
+    data['rating'] = rating;
+    data['city_id'] = cityId;
+    data['user_id'] = userId;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
@@ -286,12 +286,12 @@ class Providers {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['name'] = this.name;
-    data['url'] = this.url;
-    data['android_url'] = this.androidUrl;
-    data['ios_url'] = this.iosUrl;
-    data['color'] = this.color;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    data['url'] = url;
+    data['android_url'] = androidUrl;
+    data['ios_url'] = iosUrl;
+    data['color'] = color;
     return data;
   }
 }
@@ -322,13 +322,13 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['email'] = this.email;
-    data['email_verified_at'] = this.emailVerifiedAt;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['name'] = name;
+    data['email'] = email;
+    data['email_verified_at'] = emailVerifiedAt;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
 }
