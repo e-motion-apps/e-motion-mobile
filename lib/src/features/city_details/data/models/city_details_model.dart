@@ -4,7 +4,7 @@ class CityDetailsModel {
   List<CityOpinions>? cityOpinions;
   Country? country;
 
-  CityDetailsModel({this.city, this.country});
+  CityDetailsModel({this.city, this.country, required List<CityOpinions> cityOpinions, required List<Providers> providers});
 
   CityDetailsModel.fromJson(Map<String, dynamic> json) {
     city = json['city'] != null ? City.fromJson(json['city']) : null;

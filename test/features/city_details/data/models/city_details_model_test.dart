@@ -31,7 +31,7 @@ void main() {
         ],
       };
 
-      final model = city_details_model.fromJson(json);
+      final CityDetailsModel model = CityDetailsModel.fromJson(json);
 
       expect(model.city, isNotNull);
       expect(model.city!.id, 1);
@@ -43,7 +43,7 @@ void main() {
     });
 
     test('toJson should correctly convert model to JSON data', () {
-      final model = city_details_model(
+      final CityDetailsModel model = CityDetailsModel(
         city: City(
           id: 1,
           name: 'City Name',
@@ -70,7 +70,7 @@ void main() {
         ],
       );
 
-      final json = model.toJson();
+      final Map<String, dynamic> json = model.toJson();
 
       expect(json['city'], isNotNull);
       expect(json['city']['id'], 1);
