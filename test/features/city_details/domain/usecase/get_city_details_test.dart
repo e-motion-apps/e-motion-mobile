@@ -17,7 +17,7 @@ void main() {
   slug: 'berlin',
   latitude: '52.5170365',
   longitude: '13.3888599',
-  city_alternative_names: <>[],
+  city_alternative_names: <String>[],
   cityProviders: <CityProvider>[],
   country: Country(
     id: 83, 
@@ -29,7 +29,7 @@ void main() {
     createdAt: '2023-09-08T11:01:46.000000Z',
     updatedAt: '2023-09-08T11:01:46.000000Z',
     ),
-  cityOpinions: <>[],);
+  cityOpinions: <List>[],);
 
   const String testSlug = 'berlin';
 
