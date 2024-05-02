@@ -13,9 +13,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Home Page'),
+          title: const Text('Home Page'),
         ),
-        body: Center(
+        body: const Center(
           child: Text('Welcome to the Home Page!'),
         ),
       ),

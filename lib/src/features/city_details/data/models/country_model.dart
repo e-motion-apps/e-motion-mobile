@@ -2,24 +2,15 @@ import 'package:emotion/src/features/city_details/domain/entities/country.dart';
 
 class CountryModel extends Country {
   const CountryModel({
-    required int id,
-    required String name,
-    required String slug,
-    required String latitude,
-    required String longitude,
-    required String iso, 
-    required String? createdAt,
-    required String? updatedAt,
-  }) : super(
-          id: id,
-          name: name,
-          slug: slug,
-          latitude: latitude,
-          longitude: longitude,
-          iso: iso,
-          createdAt: createdAt,
-          updatedAt: updatedAt,
-        );
+    required super.id,
+    required super.name,
+    required super.slug,
+    required super.latitude,
+    required super.longitude,
+    required super.iso, 
+    required super.createdAt,
+    required super.updatedAt,
+  });
 
   factory CountryModel.fromJson(Map<String, dynamic> json) {
     return CountryModel(
@@ -34,8 +25,9 @@ class CountryModel extends Country {
     );
   }
 
+  @override
   Map<String, dynamic> toJson() {
-    return {
+    return <String, >{
       'id': id,
       'name': name,
       'slug': slug,

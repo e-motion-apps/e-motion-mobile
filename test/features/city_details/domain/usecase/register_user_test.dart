@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:emotion/src/core/error/failure.dart';
 import 'package:emotion/src/features/auth/domain/entities/user.dart';
 import 'package:emotion/src/features/auth/domain/usecases/register_user.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -8,7 +9,7 @@ import '../../../../helpers/test_helper.mocks.dart';
 
 void main() {
 
-  const testUser = User(
+  const User testUser = User(
     name: 'Test',
     email: 'test@example.com',
     password: 'password',
@@ -16,12 +17,12 @@ void main() {
 
   test('should return a User object when the user is registered', () async {
 
-    final mockUserRepository = MockUserRepository(); 
+    final MockUserRepository mockUserRepository = MockUserRepository(); 
     when(mockUserRepository.registerUser(testUser.name, testUser.email, testUser.password))
-        .thenAnswer((_) async => Right(testUser));
+        .thenAnswer((_) async => const Right(testUser));
 
-    RegisterUserUseCase registerUserUseCase = RegisterUserUseCase(mockUserRepository);
-    final result = await registerUserUseCase.execute(
+    final RegisterUserUseCase registerUserUseCase = RegisterUserUseCase(mockUserRepository);
+    final Either<Failure, User> result = await registerUserUseCase.execute(
       testUser.name,
       testUser.email,
       testUser.password,
@@ -32,7 +33,7 @@ void main() {
       testUser.name,
       testUser.email,
       testUser.password,
-    ));
+    ),);
     verifyNoMoreInteractions(mockUserRepository);
   });
 }

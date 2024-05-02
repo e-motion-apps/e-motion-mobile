@@ -1,5 +1,5 @@
-import 'city_provider.dart';
-import 'country.dart';
+import 'package:emotion/src/features/city_details/domain/entities/city_provider.dart';
+import 'package:emotion/src/features/city_details/domain/entities/country.dart';
 import 'package:equatable/equatable.dart';
 
 class City extends Equatable {
@@ -28,7 +28,7 @@ class City extends Equatable {
   });
 
   @override
-  List<Object?> get props => [
+  List<Object?> get props => <Object?>[
         id,
         name,
         slug,

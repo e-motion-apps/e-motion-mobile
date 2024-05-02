@@ -1,29 +1,29 @@
-import 'package:flutter_test/flutter_test.dart';
 import 'package:emotion/src/features/city_details/data/models/city_details_model.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('city_details_model', () {
     test('fromJson should correctly parse JSON data', () {
-      final json = {
-        'city': {
+      final Map<String, Object> json = <String, Object>{
+        'city': <String, Object>{
           'id': 1,
           'name': 'City Name',
         },
-        'providers': [
-          {
+        'providers': <Map<String, String>>[
+          <String, String>{
             'name': 'Provider 1',
           },
-          {
+          <String, String>{
             'name': 'Provider 2',
           },
         ],
-        'cityOpinions': [
-          {
+        'cityOpinions': <Map<String, Object>>[
+          <String, Object>{
             'id': 1,
             'rating': 5,
             'content': 'Great city!',
           },
-          {
+          <String, Object>{
             'id': 2,
             'rating': 3,
             'content': 'Average city.',
@@ -48,7 +48,7 @@ void main() {
           id: 1,
           name: 'City Name',
         ),
-        providers: [
+        providers: <Providers>[
           Providers(
             name: 'Provider 1',
           ),
@@ -56,7 +56,7 @@ void main() {
             name: 'Provider 2',
           ),
         ],
-        cityOpinions: [
+        cityOpinions: <CityOpinions>[
           CityOpinions(
             id: 1,
             rating: 5,

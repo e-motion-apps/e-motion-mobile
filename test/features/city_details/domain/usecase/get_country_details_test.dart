@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:emotion/src/core/error/failure.dart';
 import 'package:emotion/src/features/city_details/domain/entities/country.dart';
 import 'package:emotion/src/features/city_details/domain/usecases/get_country.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -8,7 +9,7 @@ import '../../../../helpers/test_helper.mocks.dart';
 
 void main() {
 
-  const testCountry = Country(
+  const Country testCountry = Country(
     id: 83,
     name: 'Germany',
     slug: 'germany',
@@ -17,15 +18,15 @@ void main() {
     iso: 'de',
   );
 
-  const testSlug = 'germany';
+  const String testSlug = 'germany';
 
   test('should get country from the repository', () async {
-    final mockCountryRepository = MockCountryRepository();
+    final MockCountryRepository mockCountryRepository = MockCountryRepository();
     when(mockCountryRepository.getCountry(testSlug))
         .thenAnswer((_) async => const Right(testCountry));
 
-    GetCountryUseCase getCountryUseCase = GetCountryUseCase(mockCountryRepository);
-    final result = await getCountryUseCase.execute(testSlug);
+    final GetCountryUseCase getCountryUseCase = GetCountryUseCase(mockCountryRepository);
+    final Either<Failure, Country> result = await getCountryUseCase.execute(testSlug);
 
     expect(result, const Right(testCountry));
   });

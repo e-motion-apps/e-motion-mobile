@@ -28,10 +28,10 @@ class CityDetailsModel {
       data['city'] = city!.toJson();
     }
     if (providers != null) {
-      data['providers'] = providers!.map((v) => v.toJson()).toList();
+      data['providers'] = providers!.map((Providers v) => v.toJson()).toList();
     }
     if (cityOpinions != null) {
-      data['cityOpinions'] = cityOpinions!.map((v) => v.toJson()).toList();
+      data['cityOpinions'] = cityOpinions!.map((CityOpinions v) => v.toJson()).toList();
     }
     return data;
   }
@@ -57,7 +57,7 @@ class City {
       this.cityAlternativeNames,
       this.cityProviders,
       this.country,
-      this.cityOpinions});
+      this.cityOpinions,});
 
   City.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -96,17 +96,17 @@ class City {
     data['longitude'] = longitude;
     if (cityAlternativeNames != null) {
       data['city_alternative_names'] =
-          cityAlternativeNames!.map((v) => v.toJson()).toList();
+          cityAlternativeNames!.map((CityAlternativeNames v) => v.toJson()).toList();
     }
     if (cityProviders != null) {
       data['cityProviders'] =
-          cityProviders!.map((v) => v.toJson()).toList();
+          cityProviders!.map((CityProviders v) => v.toJson()).toList();
     }
     if (country != null) {
       data['country'] = country!.toJson();
     }
     if (cityOpinions != null) {
-      data['cityOpinions'] = cityOpinions!.map((v) => v.toJson()).toList();
+      data['cityOpinions'] = cityOpinions!.map((CityOpinions v) => v.toJson()).toList();
     }
     return data;
   }
@@ -120,7 +120,7 @@ class CityAlternativeNames {
   String? updatedAt;
 
   CityAlternativeNames(
-      {this.id, this.name, this.cityId, this.createdAt, this.updatedAt});
+      {this.id, this.name, this.cityId, this.createdAt, this.updatedAt,});
 
   CityAlternativeNames.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -155,7 +155,7 @@ class CityProviders {
       this.cityId,
       this.createdBy,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,});
 
   CityProviders.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -198,7 +198,7 @@ class Country {
       this.longitude,
       this.iso,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,});
 
   Country.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -243,7 +243,7 @@ class CityOpinions {
       this.cityId,
       this.userId,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,});
 
   CityOpinions.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -310,7 +310,7 @@ class User {
       this.email,
       this.emailVerifiedAt,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,});
 
   User.fromJson(Map<String, dynamic> json) {
     id = json['id'];

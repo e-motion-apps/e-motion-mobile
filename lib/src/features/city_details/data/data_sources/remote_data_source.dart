@@ -13,8 +13,8 @@ class CityDetailsRemoteDataSourceImpl extends CityDetailsRemoteDataSource {
 
   @override
   Future<CityDetailsModel> getCityDetails(String cityName, String countryName) async {
-    final response = await client.get(
-      Uri.parse('https://dev.escooters.blumilk.pl/api/$countryName/$cityName')
+    final http.Response response = await client.get(
+      Uri.parse('https://dev.escooters.blumilk.pl/api/$countryName/$cityName'),
       );
     if (response.statusCode == 200) {
       return CityDetailsModel.fromJson(response.body);
