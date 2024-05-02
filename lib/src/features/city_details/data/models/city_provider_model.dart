@@ -22,7 +22,7 @@ class CityProviderModel extends CityProvider
 
   @override
   Map<String, dynamic> toJson() {
-    return <String, >{
+    return <String, dynamic>{
       'id': id,
       'providerName': providerName,
       'cityId': cityId,

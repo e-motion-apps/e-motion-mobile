@@ -17,7 +17,7 @@ class CityDetailsRemoteDataSourceImpl extends CityDetailsRemoteDataSource {
       Uri.parse('https://dev.escooters.blumilk.pl/api/$countryName/$cityName'),
       );
     if (response.statusCode == 200) {
-      return CityDetailsModel.fromJson(response.body);
+      return CityDetailsModel.fromJson(response.body as Map<String, dynamic>);
     } else {
       throw Exception();
     }

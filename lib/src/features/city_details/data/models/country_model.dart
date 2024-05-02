@@ -27,7 +27,7 @@ class CountryModel extends Country {
 
   @override
   Map<String, dynamic> toJson() {
-    return <String, >{
+    return <String, dynamic>{
       'id': id,
       'name': name,
       'slug': slug,
