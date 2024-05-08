@@ -21,6 +21,9 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Copy environment
+        run: cp .env.example .env
+
       - name: Run Flutter Analyze
         run: flutter analyze
 
