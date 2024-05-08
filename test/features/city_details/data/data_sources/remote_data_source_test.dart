@@ -1,5 +1,3 @@
-
-
 import 'package:emotion/src/features/city_details/data/data_sources/remote_data_source.dart';
 import 'package:emotion/src/features/city_details/data/models/city_details_model.dart';
 import 'package:flutter_test/flutter_test.dart';

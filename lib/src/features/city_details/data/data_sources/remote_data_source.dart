@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:emotion/src/features/city_details/data/models/city_details_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,7 +18,7 @@ class CityDetailsRemoteDataSourceImpl extends CityDetailsRemoteDataSource {
       Uri.parse('https://dev.escooters.blumilk.pl/api/$countryName/$cityName'),
       );
     if (response.statusCode == 200) {
-      return CityDetailsModel.fromJson(response.body as Map<String, dynamic>);
+      return CityDetailsModel.fromJson(jsonDecode(response.body));
     } else {
       throw Exception();
     }
