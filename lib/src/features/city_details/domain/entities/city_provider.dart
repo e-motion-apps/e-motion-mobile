@@ -25,5 +25,4 @@ class CityProvider extends Equatable {
     updatedAt,
   ];
 
-  toJson() {}
 }
