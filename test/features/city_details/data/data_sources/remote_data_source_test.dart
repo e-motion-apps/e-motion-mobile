@@ -23,7 +23,7 @@ void main() {
       when(mockHttpClient.get(Uri.parse('https://dev.escooters.blumilk.pl/api/Poland/Warsaw')))
         .thenAnswer((_) async => http.Response('{"city": {"id": 1, "name": "Warsaw"}, "providers": [{"name": "Provider 1"}, {"name": "Provider 2"}], "cityOpinions": [{"id": 1, "rating": 5, "content": "Great city!"}, {"id": 2, "rating": 3, "content": "Average city."}]}', 200));
       // act
-      final result = await cityDetailsRemoteDataSourceImpl.getCityDetails('Warsaw', 'Poland');
+      final CityDetailsModel result = await cityDetailsRemoteDataSourceImpl.getCityDetails('Warsaw', 'Poland');
       // assert
       expect(result, isA<CityDetailsModel>());
     });
@@ -33,7 +33,7 @@ void main() {
       when(mockHttpClient.get(Uri.parse('https://dev.escooters.blumilk.pl/api/Poland/Warsaw')))
         .thenAnswer((_) async => http.Response('Not Found', 404));
       // act
-      final call = cityDetailsRemoteDataSourceImpl.getCityDetails;
+      final Future<CityDetailsModel> Function(String cityName, String countryName) call = cityDetailsRemoteDataSourceImpl.getCityDetails;
       // assert
       expect(() => call('Warsaw', 'Poland'), throwsException);
     });

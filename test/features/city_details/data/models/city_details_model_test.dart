@@ -68,6 +68,16 @@ void main() {
             content: 'Average city.',
           ),
         ],
+        country: Country(
+          id: 1,
+          name: 'Country Name',
+          slug: 'country-name',
+          latitude: '0.0',
+          longitude: '0.0',
+          iso: 'ISO',
+          createdAt: '2021-01-01T00:00:00.000Z',
+          updatedAt: '2021-01-01T00:00:00.000Z',
+        )
       );
 
       final Map<String, dynamic> json = model.toJson();
