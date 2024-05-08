@@ -19,22 +19,21 @@ void main() {
   
   group('getCityDetails', () {
     test('should return CityDetailsModel when the response code is 200', () async {
-      // arrange
       when(mockHttpClient.get(Uri.parse('https://dev.escooters.blumilk.pl/api/Poland/Warsaw')))
         .thenAnswer((_) async => http.Response('{"city": {"id": 1, "name": "Warsaw"}, "providers": [{"name": "Provider 1"}, {"name": "Provider 2"}], "cityOpinions": [{"id": 1, "rating": 5, "content": "Great city!"}, {"id": 2, "rating": 3, "content": "Average city."}]}', 200));
-      // act
+
       final CityDetailsModel result = await cityDetailsRemoteDataSourceImpl.getCityDetails('Warsaw', 'Poland');
-      // assert
+
       expect(result, isA<CityDetailsModel>());
     });
 
     test('should throw an exception when the response code is not 200', () async {
-      // arrange
+
       when(mockHttpClient.get(Uri.parse('https://dev.escooters.blumilk.pl/api/Poland/Warsaw')))
         .thenAnswer((_) async => http.Response('Not Found', 404));
-      // act
+
       final Future<CityDetailsModel> Function(String cityName, String countryName) call = cityDetailsRemoteDataSourceImpl.getCityDetails;
-      // assert
+
       expect(() => call('Warsaw', 'Poland'), throwsException);
     });
   });
