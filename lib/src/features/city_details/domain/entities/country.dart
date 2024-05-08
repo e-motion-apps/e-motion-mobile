@@ -39,5 +39,4 @@ class Country extends Equatable{
     updatedAt,
   ];
 
-  toJson() {}
 }
