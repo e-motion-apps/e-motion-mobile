@@ -11,7 +11,6 @@ linter:
     - always_use_package_imports
     - annotate_overrides
     - avoid_bool_literals_in_conditional_expressions
-    - always_specify_types
     - avoid_double_and_int_checks
     - avoid_empty_else
     - avoid_equals_and_hash_code_on_mutable_classes
