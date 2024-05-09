@@ -22,13 +22,6 @@ class HomePage extends StatelessWidget {
             Scaffold.of(context).openDrawer();
           },
         ),
-        actions: [
-          Image.asset(
-            'assets/images/emotion-76.png',
-            width: 40,
-            height: 40,
-          ),
-        ],
       ),
       body: const Center(
         child: Text('Welcome to the Escooters Home Page!'),
