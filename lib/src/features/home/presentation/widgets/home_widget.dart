@@ -9,12 +9,12 @@ class HomePage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.menu),
           onPressed: () {
-            // Add your menu button functionality here
+            Scaffold.of(context).openDrawer();
           },
         ),
         actions: [
           Image.asset(
-            'assets/emotion-76.png',
+            'assets/images/emotion-76.png',
             width: 40,
             height: 40,
           ),
