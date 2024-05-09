@@ -12,7 +12,8 @@ class HomePage extends StatelessWidget {
               width: 40,
               height: 40,
             ),
-            const Text('Escooters'),
+            const SizedBox(width: 8,),
+            const Text('E-Motion'),
           ],
         ),
         leading: IconButton(
