@@ -7,5 +7,5 @@ class LogoutUserUseCase {
 
   Future<void> call() async {
     await userRepository.logoutUser();
-}
+  }
 }

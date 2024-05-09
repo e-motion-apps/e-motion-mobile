@@ -1,9 +1,10 @@
 import 'package:equatable/equatable.dart';
 
-class Country extends Equatable{
+class Country extends Equatable {
   final int id;
   final String name;
   final String slug;
+
   // ignore: non_constant_identifier_names
   final String? alternative_name;
   final String latitude;
@@ -11,7 +12,6 @@ class Country extends Equatable{
   final String iso;
   final String? createdAt;
   final String? updatedAt;
-
 
   const Country({
     required this.id,
@@ -28,15 +28,14 @@ class Country extends Equatable{
 
   @override
   List<Object?> get props => <Object?>[
-    id,
-    name,
-    slug,
-    alternative_name,
-    latitude,
-    longitude,
-    iso,
-    createdAt,
-    updatedAt,
-  ];
-
+        id,
+        name,
+        slug,
+        alternative_name,
+        latitude,
+        longitude,
+        iso,
+        createdAt,
+        updatedAt,
+      ];
 }

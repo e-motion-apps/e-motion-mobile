@@ -1,4 +1,3 @@
-
 import 'package:emotion/src/features/city_details/data/models/city_provider_model.dart';
 import 'package:emotion/src/features/city_details/data/models/country_model.dart';
 import 'package:emotion/src/features/city_details/domain/entities/city.dart';
@@ -27,12 +26,9 @@ class CityModel extends City {
       longitude: cityJson['longitude'],
       // ignore: non_constant_identifier_names
       city_alternative_names: cityJson['city_alternative_names'],
-      cityProviders: (cityJson['cityProviders'] as List)
-          .map((e) => CityProviderModel.fromJson(e))
-          .toList(),
+      cityProviders: (cityJson['cityProviders'] as List).map((e) => CityProviderModel.fromJson(e)).toList(),
       country: CountryModel.fromJson(cityJson['country']),
       cityOpinions: cityJson['cityOpinions'],
     );
   }
-  
 }

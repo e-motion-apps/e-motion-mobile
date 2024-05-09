@@ -1,8 +1,7 @@
 import 'package:emotion/src/features/city_details/domain/entities/city_provider.dart';
 
-class CityProviderModel extends CityProvider
-{
-  const CityProviderModel ({
+class CityProviderModel extends CityProvider {
+  const CityProviderModel({
     required super.id,
     required super.providerName,
     required super.cityId,
@@ -29,5 +28,4 @@ class CityProviderModel extends CityProvider
       'updatedAt': updatedAt,
     };
   }
-
 }

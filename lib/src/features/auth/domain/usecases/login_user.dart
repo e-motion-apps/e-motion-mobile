@@ -8,7 +8,7 @@ class LoginUserUseCase {
 
   const LoginUserUseCase(this.userRepository);
 
-  Future<Either<Failure,User>> execute(String email, String password) {
+  Future<Either<Failure, User>> execute(String email, String password) {
     return userRepository.loginUser(email, password);
   }
 }

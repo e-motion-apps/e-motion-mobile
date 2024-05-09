@@ -7,7 +7,7 @@ class CountryModel extends Country {
     required super.slug,
     required super.latitude,
     required super.longitude,
-    required super.iso, 
+    required super.iso,
     required super.createdAt,
     required super.updatedAt,
   });
