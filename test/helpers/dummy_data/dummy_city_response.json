@@ -1,0 +1,56 @@
+{
+    "city": {
+    "id": 81,
+    "name": "Berlin",
+    "slug": "berlin",
+    "latitude": "52.5170365",
+    "longitude": "13.3888599",
+    "city_alternative_names": [],
+    "cityProviders": [
+        {
+            "id": 34,
+            "provider_name": "Bolt",
+            "city_id": 81,
+            "created_by": "scrapper",
+            "created_at": "2023-09-08T11:04:26.000000Z",
+            "updated_at": "2023-09-08T11:04:26.000000Z"
+        },
+        {
+            "id": 1119,
+            "provider_name": "Voi",
+            "city_id": 81,
+            "created_by": "scrapper",
+            "created_at": "2023-09-08T11:20:04.000000Z",
+            "updated_at": "2023-09-08T11:20:04.000000Z"
+        },
+        {
+            "id": 389,
+            "provider_name": "Lime",
+            "city_id": 81,
+            "created_by": "scrapper",
+            "created_at": "2023-09-08T11:19:32.000000Z",
+            "updated_at": "2023-09-08T11:19:32.000000Z"
+        },
+        {
+            "id": 767,
+            "provider_name": "Tier",
+            "city_id": 81,
+            "created_by": "scrapper",
+            "created_at": "2023-09-08T11:19:49.000000Z",
+            "updated_at": "2023-09-08T11:19:49.000000Z"
+        }
+    ],
+    "country": {
+        "id": 83,
+        "name": "Germany",
+        "slug": "germany",
+        "alternative_name": null,
+        "latitude": "51.00000000",
+        "longitude": "9.00000000",
+        "iso": "de",
+        "created_at": "2023-09-08T11:01:46.000000Z",
+        "updated_at": "2023-09-08T11:01:46.000000Z"
+    },
+    "cityOpinions": []
+    }
+}

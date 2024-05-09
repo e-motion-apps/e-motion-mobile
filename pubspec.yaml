@@ -1,5 +1,5 @@
-name: emotion_ios
-description: "A new Flutter project."
+name: emotion
+description: "An app that helps you to find the best way to get around your city."
 
 # Prevent accidental publishing to pub.dev.
 publish_to: 'none'
@@ -14,15 +14,39 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
+  http: ^0.13.3
+  flutter_bloc: ^8.1.5
+  equatable: ^2.0.5
+  get_it: ^7.7.0
+  intl: ^0.18.1
+  floor: ^1.4.2
+  retrofit: ^4.1.0
+  flutter_hooks: ^0.20.5
+  rxdart: ^0.27.7
+  dartz: ^0.10.1
+  flutter_dotenv: ^5.1.0
+  
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^3.0.0
+  retrofit_generator: ^8.1.0
+  floor_generator: ^1.4.2
+  build_runner: ^2.4.9
+  bloc_test: ^9.1.7
+  mockito: ^5.4.4
+  mocktail: ^1.0.3
 
 flutter:
   uses-material-design: true
+
+  fonts:
+  - family: Helvetica-Neue
+    fonts:
+      - asset: assets/fonts/helvetica-neue/HelveticaNeue.ttf
+      - asset: assets/fonts/helvetica-neue/HelveticaNeue-Bold.ttf
+        weight: 700
 
   # Enable generation of localized Strings from arb files.
   generate: true
@@ -30,3 +54,4 @@ flutter:
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
+    - .env
