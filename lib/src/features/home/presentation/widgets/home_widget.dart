@@ -5,7 +5,16 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Escooters Home'),
+        title: Row(
+          children: [
+            Image.asset(
+              'assets/images/emotion-76.png',
+              width: 40,
+              height: 40,
+            ),
+            const Text('Escooters'),
+          ],
+        ),
         leading: IconButton(
           icon: Icon(Icons.menu),
           onPressed: () {
