@@ -9,6 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      title: 'E-Motion',
       debugShowCheckedModeBanner: false,
       home: HomePage(), 
     );
