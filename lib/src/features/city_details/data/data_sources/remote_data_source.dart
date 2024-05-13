@@ -19,7 +19,7 @@ class CityDetailsRemoteDataSourceImpl extends CityDetailsRemoteDataSource {
     if (response.statusCode == 200) {
       return CityDetailsModel.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception();
+      throw Exception('Failed to load city details');
     }
   }
 }
