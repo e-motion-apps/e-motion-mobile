@@ -9,6 +9,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Row(
           children: [
+            const SizedBox(width: 70,),
             Image.asset(
               'assets/images/emotion-76.png',
               width: 40,
