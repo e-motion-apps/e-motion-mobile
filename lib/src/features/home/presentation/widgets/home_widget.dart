@@ -1,9 +1,9 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:emotion/src/features/city_details/data/data_sources/remote_data_source.dart';
 import 'package:emotion/src/features/home/presentation/bloc/home_bloc.dart';
 import 'package:emotion/src/features/home/presentation/bloc/home_event.dart';
 import 'package:emotion/src/features/home/presentation/bloc/home_state.dart';
-import 'package:emotion/src/features/city_details/data/data_sources/remote_data_source.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatelessWidget {
@@ -38,7 +38,100 @@ class HomePage extends StatelessWidget {
             ListTile(
               title: const Text('Sign In'),
               onTap: () {
-                // TODO(Leeoz): Handle Authentication
+                showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('Sign In'),
+                    content: const SingleChildScrollView(
+                    child: ListBody(
+                      children: <Widget>[
+                      Column(
+                        children: [
+                          TextField(
+                            decoration: InputDecoration(
+                              labelText: 'Email',
+                            ),
+                          ),
+                          TextField(
+                            decoration: InputDecoration(
+                              labelText: 'Password',
+                            ),
+                          ),
+                        ],
+                      ),
+                      ],
+                    ),
+                    ),
+                    actions: <Widget>[
+                    TextButton(
+                      child: const Text('Cancel'),
+                      onPressed: () {
+                      Navigator.of(context).pop();
+                      },
+                    ),
+                    TextButton(
+                      child: const Text('Sign In'),
+                      onPressed: () {
+                      // TODO(Leeoz): Handle Sign In
+                      },
+                    ),
+                    TextButton(
+                      child: const Text('Sign Up'), 
+                      onPressed: () {
+                        showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                          title: const Text('Sign Up'),
+                          content: const SingleChildScrollView(
+                            child: ListBody(
+                            children: <Widget>[
+                              Column(
+                              children: [
+                                TextField(
+                                decoration: InputDecoration(
+                                  labelText: 'Name',
+                                ),
+                                ),
+                                TextField(
+                                decoration: InputDecoration(
+                                  labelText: 'Email',
+                                ),
+                                ),
+                                TextField(
+                                decoration: InputDecoration(
+                                  labelText: 'Password',
+                                ),
+                                ),
+                              ],
+                              ),
+                            ],
+                            ),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                            child: const Text('Cancel'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            ),
+                            TextButton(
+                            child: const Text('Sign Up'),
+                            onPressed: () {
+                              // TODO(Leeoz): Handle Sign Up
+                            },
+                            ),
+                          ],
+                          );
+                        },
+                        );
+                      },
+                    )
+                    ],
+                  );
+                  },
+                );
               },
             ),
             ListTile(
