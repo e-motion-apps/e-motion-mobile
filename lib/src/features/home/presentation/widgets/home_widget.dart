@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:emotion/src/features/home/presentation/bloc/home_bloc.dart';
+import 'package:emotion/src/features/home/presentation/bloc/home_event.dart';
+import 'package:emotion/src/features/home/presentation/bloc/home_state.dart';
+import 'package:emotion/src/features/city_details/data/data_sources/remote_data_source.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -50,27 +56,42 @@ class HomePage extends StatelessWidget {
           ],
         ),
       ),
-      body: const Center( // TODO(Leeoz): Implement map on the home page
-        child: 
-        Column(
-          children: [
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'City Name',
+      body: BlocProvider(
+        create: (context) => HomeBloc(),
+        child: BlocBuilder<HomeBloc, HomeState>(
+          builder: (context, state) {
+            return Center(
+              child: Column(
+                children: [
+                  TextField(
+                    decoration: const InputDecoration(
+                      labelText: 'City Name',
+                    ),
+                    onChanged: (value) {
+                      context.read<HomeBloc>().add(CityNameChanged(cityName: value));
+                    },
+                  ),
+                  TextField(
+                    decoration: const InputDecoration(
+                      labelText: 'Country Name',
+                    ),
+                    onChanged: (value) {
+                      context.read<HomeBloc>().add(CountryNameChanged(countryName: value));
+                    },
+                  ),
+                  ElevatedButton(
+                    onPressed: () async {
+                      CityDetailsRemoteDataSourceImpl dataSource = CityDetailsRemoteDataSourceImpl(client: http.Client());
+                      await dataSource.getCityDetails(state.cityName, state.countryName);
+                    },
+                    child: const Text('Get City Details'),
+                  ),
+                ],
               ),
-            ),
-            TextField(
-              decoration: InputDecoration(
-                labelText: 'Country Name',
-              ),
-            ),
-            ElevatedButton(
-                onPressed: null,
-              child: Text('Get City Details'),
-            ),
-          ],
+            );
+          },
         ),
-    ),
+      ),
     );
   }
 }
