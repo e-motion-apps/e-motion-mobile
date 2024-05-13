@@ -127,7 +127,7 @@ class HomePage extends StatelessWidget {
                         },
                         );
                       },
-                    )
+                    ),
                     ],
                   );
                   },
@@ -174,7 +174,7 @@ class HomePage extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () async {
-                      CityDetailsRemoteDataSourceImpl dataSource = CityDetailsRemoteDataSourceImpl(client: http.Client());
+                      final CityDetailsRemoteDataSourceImpl dataSource = CityDetailsRemoteDataSourceImpl(client: http.Client());
                       await dataSource.getCityDetails(state.cityName, state.countryName);
                     },
                     child: const Text('Get City Details'),

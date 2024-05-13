@@ -11,3 +11,10 @@ class CountryNameChanged extends HomeEvent {
 
   CountryNameChanged({required this.countryName});
 }
+
+class GetCityDetailsPressed extends HomeEvent {
+  final String cityName;
+  final String countryName;
+
+  GetCityDetailsPressed({required this.cityName, required this.countryName});
+}

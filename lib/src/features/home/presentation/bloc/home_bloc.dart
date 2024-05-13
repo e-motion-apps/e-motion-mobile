@@ -1,3 +1,4 @@
+import 'package:emotion/src/features/city_details/data/data_sources/remote_data_source.dart';
 import 'package:emotion/src/features/home/presentation/bloc/home_event.dart';
 import 'package:emotion/src/features/home/presentation/bloc/home_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,9 +8,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
 Stream<HomeState> mapEventToState(HomeEvent event) async* {
     if (event is CityNameChanged) {
-      yield HomeState(cityName: event.cityName, countryName: state.countryName);
+      yield state.copyWith(cityName: event.cityName);
     } else if (event is CountryNameChanged) {
-      yield HomeState(cityName: state.cityName, countryName: event.countryName);
+      yield state.copyWith(countryName: event.countryName);
     }
+
   }
 }

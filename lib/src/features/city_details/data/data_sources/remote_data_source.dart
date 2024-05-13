@@ -13,13 +13,11 @@ class CityDetailsRemoteDataSourceImpl extends CityDetailsRemoteDataSource {
 
   @override
   Future<CityDetailsModel> getCityDetails(String cityName, String countryName) async {
-    final http.Response response = await client.get(
-      Uri.parse('https://dev.escooters.blumilk.pl/api/$countryName/$cityName'),
-    );
+    final response = await client.get(Uri.parse('https://dev.escooters.blumilk.pl/api/$countryName/$cityName'));
     if (response.statusCode == 200) {
       return CityDetailsModel.fromJson(jsonDecode(response.body));
     } else {
-      throw Exception('Failed to load city details');
+      throw Exception('Failed to load city details status code: ${response.statusCode}');
     }
   }
 }
