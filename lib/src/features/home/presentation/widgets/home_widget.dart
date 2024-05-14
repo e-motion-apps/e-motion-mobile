@@ -175,42 +175,7 @@ class HomePage extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () async {
-                      CityDetailsModel cityDetails = CityDetailsModel();
-                      final CityDetailsRemoteDataSourceImpl dataSource = CityDetailsRemoteDataSourceImpl(client: http.Client());
-                      cityDetails = await dataSource.getCityDetails(state.cityName, state.countryName);
-
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: Text('City Details: ${cityDetails.city!.name}'),
-                            content: SingleChildScrollView(
-                              child: ListBody(
-                                children: <Widget>[
-                                  Column(
-                                    children: [
-                                      Text('City Name: ${cityDetails.city!.name}'),
-                                      Text('Country Name: ${cityDetails.country!.name}'),
-                                      Text('Latitude: ${cityDetails.city?.latitude}'),
-                                      Text('Longitude: ${cityDetails.city?.longitude}'),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            actions: <Widget>[
-                              TextButton(
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text('Close'),
-                              ),
-                            ],
-                          );
-                        },
-                      );
                     },
-
                     child: const Text('Get City Details'),
                   ),
                 ],
