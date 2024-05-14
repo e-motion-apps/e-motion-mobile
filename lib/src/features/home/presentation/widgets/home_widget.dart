@@ -178,23 +178,6 @@ class HomePage extends StatelessWidget {
                       CityDetailsModel cityDetails = CityDetailsModel();
                       final CityDetailsRemoteDataSourceImpl dataSource = CityDetailsRemoteDataSourceImpl(client: http.Client());
                       cityDetails = await dataSource.getCityDetails(state.cityName, state.countryName);
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text('City Details'),
-                            content: Text(cityDetails.toString()),
-                            actions: <Widget>[
-                              TextButton(
-                                child: const Text('OK'),
-                                onPressed: () {
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
                     },
                     child: const Text('Get City Details'),
                   ),
