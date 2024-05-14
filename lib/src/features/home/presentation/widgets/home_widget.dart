@@ -174,8 +174,26 @@ class HomePage extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () async {
+                      String cityDetails = '';
                       final CityDetailsRemoteDataSourceImpl dataSource = CityDetailsRemoteDataSourceImpl(client: http.Client());
-                      await dataSource.getCityDetails(state.cityName, state.countryName);
+                      cityDetails = (await dataSource.getCityDetails(state.cityName, state.countryName)) as String;
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text('City Details'),
+                            content: Text(cityDetails),
+                            actions: <Widget>[
+                              TextButton(
+                                child: const Text('OK'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
                     child: const Text('Get City Details'),
                   ),
