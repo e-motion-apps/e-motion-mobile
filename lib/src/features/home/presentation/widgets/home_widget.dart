@@ -1,8 +1,10 @@
+import 'package:emotion/src/features/city_details/data/data_sources/remote_data_source.dart';
 import 'package:emotion/src/features/home/presentation/bloc/home_bloc.dart';
 import 'package:emotion/src/features/home/presentation/bloc/home_event.dart';
 import 'package:emotion/src/features/home/presentation/bloc/home_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart' as http;
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -172,6 +174,8 @@ class HomePage extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () async {
+                      final CityDetailsRemoteDataSourceImpl remoteDataSource = CityDetailsRemoteDataSourceImpl(client: http.Client());
+                      await remoteDataSource.getCityDetails(state.cityName, state.countryName);
                     },
                     child: const Text('Get City Details'),
                   ),
