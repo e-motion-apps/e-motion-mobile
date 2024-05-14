@@ -1,4 +1,5 @@
 import 'package:emotion/src/features/city_details/data/data_sources/remote_data_source.dart';
+import 'package:emotion/src/features/city_details/data/models/city_details_model.dart';
 import 'package:emotion/src/features/home/presentation/bloc/home_bloc.dart';
 import 'package:emotion/src/features/home/presentation/bloc/home_event.dart';
 import 'package:emotion/src/features/home/presentation/bloc/home_state.dart';
@@ -174,15 +175,15 @@ class HomePage extends StatelessWidget {
                   ),
                   ElevatedButton(
                     onPressed: () async {
-                      String cityDetails = '';
+                      CityDetailsModel cityDetails = CityDetailsModel();
                       final CityDetailsRemoteDataSourceImpl dataSource = CityDetailsRemoteDataSourceImpl(client: http.Client());
-                      cityDetails = (await dataSource.getCityDetails(state.cityName, state.countryName)) as String;
+                      cityDetails = await dataSource.getCityDetails(state.cityName, state.countryName);
                       showDialog(
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
                             title: const Text('City Details'),
-                            content: Text(cityDetails),
+                            content: Text(cityDetails.toString()),
                             actions: <Widget>[
                               TextButton(
                                 child: const Text('OK'),
