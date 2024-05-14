@@ -3,14 +3,13 @@ import 'package:emotion/src/features/home/presentation/bloc/home_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc() : super(HomeState(cityName: '', countryName: ''));
+  HomeBloc() : super(HomeState(cityName: '', countryName: '')) {
+    on<CityNameChanged>((event, emit) {
+      emit(state.copyWith(cityName: event.cityName));
+    });
 
-Stream<HomeState> mapEventToState(HomeEvent event) async* {
-    if (event is CityNameChanged) {
-      yield state.copyWith(cityName: event.cityName);
-    } else if (event is CountryNameChanged) {
-      yield state.copyWith(countryName: event.countryName);
-    }
-
+    on<CountryNameChanged>((event, emit) {
+      emit(state.copyWith(countryName: event.countryName));
+    });
   }
 }
