@@ -1,4 +1,5 @@
 import 'package:emotion/src/features/city_details/data/data_sources/remote_data_source.dart';
+import 'package:emotion/src/features/city_details/data/models/city_details_model.dart';
 import 'package:emotion/src/features/home/presentation/bloc/home_bloc.dart';
 import 'package:emotion/src/features/home/presentation/bloc/home_event.dart';
 import 'package:emotion/src/features/home/presentation/bloc/home_state.dart';
@@ -6,8 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  HomePageState createState() => HomePageState();
+}
+
+class HomePageState extends State<HomePage> {
+  Future<CityDetailsModel>? futureCityDetails;
 
   @override
   Widget build(BuildContext context) {
@@ -177,10 +185,35 @@ class HomePage extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () async {
                       final CityDetailsRemoteDataSourceImpl remoteDataSource = CityDetailsRemoteDataSourceImpl(client: http.Client());
-                      await remoteDataSource.getCityDetails(state.cityName, state.countryName);
+                      setState(() {
+                        futureCityDetails = remoteDataSource.getCityDetails(state.cityName, state.countryName);
+                      });
+
                     },
                     child: const Text('Get City Details'),
                   ),
+                    FutureBuilder(
+                        future: futureCityDetails,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState == ConnectionState.waiting) {
+                            return const CircularProgressIndicator();
+                          } else if (snapshot.hasError) {
+                            return Text('Error: ${snapshot.error}');
+                          } else if (snapshot.hasData){
+                            return Column(
+                              children: <Widget>[
+                                Text('City: ${snapshot.data!.city!.name}'),
+                                Text('Country: ${snapshot.data!.country!.name}'),
+                                Text('Providers: ${snapshot.data!.providers!.map((provider) => provider.name).join(', ')}'),
+                                Text('Opinions: ${snapshot.data!.cityOpinions!.map((opinion) => opinion.content).join(', ')}'),
+                              ],
+                            );
+                          } else {
+                            return const Text('No Data');
+                          }
+                        },
+                      ),
+
                 ],
               ),
             );

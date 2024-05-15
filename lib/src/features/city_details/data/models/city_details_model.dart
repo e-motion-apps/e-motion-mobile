@@ -19,6 +19,7 @@ class CityDetailsModel {
       json['cityOpinions'].forEach((v) {
         cityOpinions!.add(CityOpinions.fromJson(v));
       });
+      country = json['country'] != null ? Country.fromJson(json['country']) : null;
     }
   }
 
