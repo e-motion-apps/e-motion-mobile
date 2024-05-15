@@ -15,6 +15,7 @@ class AuthSource {
         'password': password,
       },
     );
+    print(response.body);
 
     if (response.statusCode == 200) {
       token = jsonDecode(response.body)['access_token'];
@@ -33,7 +34,7 @@ class AuthSource {
       },
     );
 
-    if (response.statusCode != 200) {
+    if (response.statusCode != 201) {
       throw Exception('Failed to sign up status code: ${response.statusCode}');
     }
   }

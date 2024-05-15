@@ -108,7 +108,7 @@ class HomePageState extends State<HomePage> {
                                   onPressed: () {
                                     final AuthSource authSource = AuthSource( client: http.Client());
                                     authSource.signInWithEmailAndPassword(
-                                      'admin@example.com','password',
+                                      'mobiletest@example.com','password',
                                     );
                                     Navigator.of(context).pop();
                                   },
