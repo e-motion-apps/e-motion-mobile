@@ -199,7 +199,7 @@ class HomePageState extends State<HomePage> {
                           if (snapshot.connectionState == ConnectionState.waiting) {
                             return const CircularProgressIndicator();
                           } else if (snapshot.hasError) {
-                            return Text('Error: ${snapshot.error}');
+                            return const Text('No city found.');
                           } else if (snapshot.hasData){
                             return AlertDialog(
                                 title: const Text('City Details'),
@@ -210,15 +210,15 @@ class HomePageState extends State<HomePage> {
                                         children: [
                                           Text('City: ${snapshot.data!.city!.name}'),
                                           Text('Country: ${snapshot.data!.country!.name}'),
-                                          Text('Providers: ${snapshot.data!.providers!.map((provider) => provider.name).join(', ')}'),
-                                          Text('Opinions: ${snapshot.data!.cityOpinions!.map((opinion) => opinion.content).join(', ')}'),
+                                          Text('Providers: ${snapshot.data!.cityProviders!.map((cityProvider) => cityProvider.providerName).join(', ')}'),
+                                          Text('City Opinions: ${snapshot.data!.cityOpinions!.map((cityOpinion) => cityOpinion.content).join(', ')}'),
                                         ],
                                       ),
                                     ],
                                   ),
                                 ),
                             );
-                          } else {
+                          } else { 
                             return const Text('Press the button to get city details.');
                           }
                         },

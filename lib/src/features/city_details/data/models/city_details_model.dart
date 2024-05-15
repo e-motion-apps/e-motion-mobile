@@ -2,6 +2,7 @@ class CityDetailsModel {
   City? city;
   List<Providers>? providers;
   List<CityOpinions>? cityOpinions;
+  List<CityProviders>? cityProviders;
   Country? country;
 
   CityDetailsModel({this.city, this.country, this.cityOpinions, this.providers});
@@ -21,6 +22,12 @@ class CityDetailsModel {
       });
     }
     country = json['city'] != null && json['city']['country'] != null ? Country.fromJson(json['city']['country']) : null;
+     if (json['city'] != null && json['city']['cityProviders'] != null) {
+      cityProviders = <CityProviders>[];
+      json['city']['cityProviders'].forEach((v) {
+      cityProviders!.add(CityProviders.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
