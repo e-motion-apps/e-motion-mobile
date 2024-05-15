@@ -19,8 +19,8 @@ class CityDetailsModel {
       json['cityOpinions'].forEach((v) {
         cityOpinions!.add(CityOpinions.fromJson(v));
       });
-      country = json['country'] != null ? Country.fromJson(json['country']) : null;
     }
+    country = json['city'] != null && json['city']['country'] != null ? Country.fromJson(json['city']['country']) : null;
   }
 
   Map<String, dynamic> toJson() {

@@ -200,13 +200,22 @@ class HomePageState extends State<HomePage> {
                           } else if (snapshot.hasError) {
                             return Text('Error: ${snapshot.error}');
                           } else if (snapshot.hasData){
-                            return Column(
-                              children: <Widget>[
-                                Text('City: ${snapshot.data!.city!.name}'),
-                                Text('Country: ${snapshot.data!.country!.name}'),
-                                Text('Providers: ${snapshot.data!.providers!.map((provider) => provider.name).join(', ')}'),
-                                Text('Opinions: ${snapshot.data!.cityOpinions!.map((opinion) => opinion.content).join(', ')}'),
-                              ],
+                            return AlertDialog(
+                                title: const Text('City Details'),
+                                content: SingleChildScrollView(
+                                  child: ListBody(
+                                    children: <Widget>[
+                                      Column(
+                                        children: [
+                                          Text('City: ${snapshot.data!.city!.name}'),
+                                          Text('Country: ${snapshot.data!.country!.name}'),
+                                          Text('Providers: ${snapshot.data!.providers!.map((provider) => provider.name).join(', ')}'),
+                                          Text('Opinions: ${snapshot.data!.cityOpinions!.map((opinion) => opinion.content).join(', ')}'),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
                             );
                           } else {
                             return const Text('Press the button to get city details.');
