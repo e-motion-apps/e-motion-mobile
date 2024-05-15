@@ -192,6 +192,7 @@ class HomePageState extends State<HomePage> {
                     },
                     child: const Text('Get City Details'),
                   ),
+                  const SizedBox(height: 20,),
                     FutureBuilder(
                         future: futureCityDetails,
                         builder: (context, snapshot) {
