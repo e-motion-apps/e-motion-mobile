@@ -23,17 +23,18 @@ class HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Center(
           child: Row(
-          children: [
-            Image.asset(
-              'assets/images/emotion-76.png',
-              width: 40,
-              height: 40,
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            const Text('E-Motion'),
-          ]),
+            children: [
+              Image.asset(
+                'assets/images/emotion-76.png',
+                width: 40,
+                height: 40,
+              ),
+              const SizedBox(
+                width: 8,
+              ),
+              const Text('E-Motion'),
+            ],
+          ),
         ),
         leading: Builder(
           builder: (context) => IconButton(
