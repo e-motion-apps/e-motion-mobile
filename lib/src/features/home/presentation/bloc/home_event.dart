@@ -12,6 +12,12 @@ class CountryNameChanged extends HomeEvent {
   CountryNameChanged({required this.countryName});
 }
 
+class NameChanged extends HomeEvent {
+  final String name;
+
+  NameChanged({required this.name});
+}
+
 class EmailChanged extends HomeEvent {
   final String email;
 
