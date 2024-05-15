@@ -1,3 +1,4 @@
+import 'package:emotion/src/features/auth/data/data_sources/auth_source.dart';
 import 'package:emotion/src/features/city_details/data/data_sources/remote_data_source.dart';
 import 'package:emotion/src/features/city_details/data/models/city_details_model.dart';
 import 'package:emotion/src/features/home/presentation/bloc/home_bloc.dart';
@@ -105,12 +106,10 @@ class HomePageState extends State<HomePage> {
                                 TextButton(
                                   child: const Text('Sign In'),
                                   onPressed: () {
-                                    context.read<HomeBloc>().add(
-                                          SignInWithEmailAndPasswordPressed(
-                                            email: state.email,
-                                            password: state.password,
-                                          ),
-                                        );
+                                    final AuthSource authSource = AuthSource( client: http.Client());
+                                    authSource.signInWithEmailAndPassword(
+                                      'admin@example.com','password',
+                                    );
                                     Navigator.of(context).pop();
                                   },
                                 ),
