@@ -209,7 +209,7 @@ class HomePageState extends State<HomePage> {
                               ],
                             );
                           } else {
-                            return const Text('No Data');
+                            return const Text('Press the button to get city details.');
                           }
                         },
                       ),
