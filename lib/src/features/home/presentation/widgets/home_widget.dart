@@ -57,6 +57,7 @@ class HomePage extends StatelessWidget {
                             decoration: InputDecoration(
                               labelText: 'Password',
                             ),
+                            obscureText: true,
                           ),
                         ],
                       ),
@@ -103,6 +104,7 @@ class HomePage extends StatelessWidget {
                                 decoration: InputDecoration(
                                   labelText: 'Password',
                                 ),
+                                obscureText: true,
                                 ),
                               ],
                               ),
