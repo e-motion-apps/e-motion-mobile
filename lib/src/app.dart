@@ -8,10 +8,32 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        inputDecorationTheme: const InputDecorationTheme(
+          labelStyle: TextStyle(color: Colors.blueAccent),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
+            borderRadius: BorderRadius.all(Radius.circular(15.0)),
+          ),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
+            borderRadius: BorderRadius.all(Radius.circular(15.0)),
+          ),
+          hoverColor: Colors.blueAccent,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor:
+                WidgetStateProperty.all<Color>(Colors.blueAccent),
+            foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+          ),
+        ),
+      ),
       title: 'E-Motion',
       debugShowCheckedModeBanner: false,
-      home: HomePage(), 
+      home: const HomePage(),
     );
   }
 }

@@ -23,13 +23,17 @@ class HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: Row(
           children: [
-            const SizedBox(width: 70,),
+            const SizedBox(
+              width: 70,
+            ),
             Image.asset(
               'assets/images/emotion-76.png',
               width: 40,
               height: 40,
             ),
-            const SizedBox(width: 8,),
+            const SizedBox(
+              width: 8,
+            ),
             const Text('E-Motion'),
           ],
         ),
@@ -40,7 +44,7 @@ class HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      drawer:  Drawer(
+      drawer: Drawer(
         child: ListView(
           children: [
             ListTile(
@@ -49,97 +53,106 @@ class HomePageState extends State<HomePage> {
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('Sign In'),
-                    content: const SingleChildScrollView(
-                    child: ListBody(
-                      children: <Widget>[
-                      Column(
-                        children: [
-                          TextField(
-                            decoration: InputDecoration(
-                              labelText: 'Email',
-                            ),
-                          ),
-                          TextField(
-                            decoration: InputDecoration(
-                              labelText: 'Password',
-                            ),
-                            obscureText: true,
-                          ),
-                        ],
-                      ),
-                      ],
-                    ),
-                    ),
-                    actions: <Widget>[
-                    TextButton(
-                      child: const Text('Cancel'),
-                      onPressed: () {
-                      Navigator.of(context).pop();
-                      },
-                    ),
-                    TextButton(
-                      child: const Text('Sign In'),
-                      onPressed: () {
-                      // TODO(Leeoz): Handle Sign In
-                      },
-                    ),
-                    TextButton(
-                      child: const Text('Sign Up'), 
-                      onPressed: () {
-                        showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                          title: const Text('Sign Up'),
-                          content: const SingleChildScrollView(
-                            child: ListBody(
-                            children: <Widget>[
-                              Column(
+                    return AlertDialog(
+                      title: const Text('Sign In'),
+                      content: const SingleChildScrollView(
+                        child: ListBody(
+                          children: <Widget>[
+                            Column(
                               children: [
                                 TextField(
-                                decoration: InputDecoration(
-                                  labelText: 'Name',
+                                  decoration: InputDecoration(
+                                    labelText: 'Email',
+                                  ),
                                 ),
-                                ),
-                                TextField(
-                                decoration: InputDecoration(
-                                  labelText: 'Email',
-                                ),
+                                SizedBox(
+                                  height: 10,
                                 ),
                                 TextField(
-                                decoration: InputDecoration(
-                                  labelText: 'Password',
-                                ),
-                                obscureText: true,
+                                  decoration: InputDecoration(
+                                    labelText: 'Password',
+                                  ),
+                                  obscureText: true,
                                 ),
                               ],
-                              ),
-                            ],
-                            ),
-                          ),
-                          actions: <Widget>[
-                            TextButton(
-                            child: const Text('Cancel'),
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            ),
-                            TextButton(
-                            child: const Text('Sign Up'),
-                            onPressed: () {
-                              // TODO(Leeoz): Handle Sign Up
-                            },
                             ),
                           ],
-                          );
-                        },
-                        );
-                      },
-                    ),
-                    ],
-                  );
+                        ),
+                      ),
+                      actions: <Widget>[
+                        TextButton(
+                          child: const Text('Cancel'),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                        ),
+                        TextButton(
+                          child: const Text('Sign In'),
+                          onPressed: () {
+                            // TODO(Leeoz): Handle Sign In
+                          },
+                        ),
+                        TextButton(
+                          child: const Text('Sign Up'),
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                return AlertDialog(
+                                  title: const Text('Sign Up'),
+                                  content: const SingleChildScrollView(
+                                    child: ListBody(
+                                      children: <Widget>[
+                                        Column(
+                                          children: [
+                                            TextField(
+                                              decoration: InputDecoration(
+                                                labelText: 'Name',
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            TextField(
+                                              decoration: InputDecoration(
+                                                labelText: 'Email',
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 10,
+                                            ),
+                                            TextField(
+                                              decoration: InputDecoration(
+                                                labelText: 'Password',
+                                              ),
+                                              obscureText: true,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      child: const Text('Cancel'),
+                                      onPressed: () {
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                    TextButton(
+                                      child: const Text('Sign Up'),
+                                      onPressed: () {
+                                        // TODO(Leeoz): Handle Sign Up
+                                      },
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ],
+                    );
                   },
                 );
               },
@@ -164,67 +177,131 @@ class HomePageState extends State<HomePage> {
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
             return Center(
-              child: Column(
-                children: [
-                  TextField(
-                    decoration: const InputDecoration(
-                      labelText: 'City Name',
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    TextField(
+                      decoration: const InputDecoration(
+                        labelText: 'City Name',
+                      ),
+                      onChanged: (value) {
+                        context
+                            .read<HomeBloc>()
+                            .add(CityNameChanged(cityName: value));
+                      },
                     ),
-                    onChanged: (value) {
-                      context.read<HomeBloc>().add(CityNameChanged(cityName: value));
-                    },
-                  ),
-                  TextField(
-                    decoration: const InputDecoration(
-                      labelText: 'Country Name',
+                    const SizedBox(
+                      height: 10,
                     ),
-                    onChanged: (value) {
-                      context.read<HomeBloc>().add(CountryNameChanged(countryName: value));
-                    },
-                  ),
-                  ElevatedButton(
-                    onPressed: () async {
-                      final CityDetailsRemoteDataSourceImpl remoteDataSource = CityDetailsRemoteDataSourceImpl(client: http.Client());
-                      setState(() {
-                        futureCityDetails = remoteDataSource.getCityDetails(state.cityName, state.countryName);
-                      });
-
-                    },
-                    child: const Text('Get City Details'),
-                  ),
-                  const SizedBox(height: 20,),
+                    TextField(
+                      decoration: const InputDecoration(
+                        labelText: 'Country Name',
+                      ),
+                      onChanged: (value) {
+                        context
+                            .read<HomeBloc>()
+                            .add(CountryNameChanged(countryName: value));
+                      },
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        final CityDetailsRemoteDataSourceImpl remoteDataSource =
+                            CityDetailsRemoteDataSourceImpl(
+                          client: http.Client(),
+                        );
+                        setState(() {
+                          futureCityDetails = remoteDataSource.getCityDetails(
+                            state.cityName,
+                            state.countryName,
+                          );
+                        });
+                      },
+                      child: const Text('Get City Details'),
+                    ),
                     FutureBuilder(
-                        future: futureCityDetails,
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState == ConnectionState.waiting) {
-                            return const CircularProgressIndicator();
-                          } else if (snapshot.hasError) {
-                            return const Text('No city found.');
-                          } else if (snapshot.hasData){
-                            return AlertDialog(
-                                title: const Text('City Details'),
-                                content: SingleChildScrollView(
-                                  child: ListBody(
-                                    children: <Widget>[
-                                      Column(
+                      future: futureCityDetails,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const CircularProgressIndicator(
+                            color: Colors.blue,
+                          );
+                        } else if (snapshot.hasError) {
+                          return const Text('No city found.');
+                        } else if (snapshot.hasData) {
+                          return AlertDialog(
+                            title: const Center(
+                              child: Text('City Details'),
+                            ),
+                            content: SingleChildScrollView(
+                              child: ListBody(
+                                children: <Widget>[
+                                  Column(
+                                    children: [
+                                      Row(
                                         children: [
-                                          Text('City: ${snapshot.data!.city!.name}'),
-                                          Text('Country: ${snapshot.data!.country!.name}'),
-                                          Text('Providers: ${snapshot.data!.cityProviders!.map((cityProvider) => cityProvider.providerName).join(', ')}'),
-                                          Text('City Opinions: ${snapshot.data!.cityOpinions!.map((cityOpinion) => cityOpinion.content).join(', ')}'),
+                                          const Text(
+                                            'City: ',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text(
+                                            '${snapshot.data!.city!.name}',
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          const Text(
+                                            'Country: ',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Text(
+                                            '${snapshot.data!.country!.name}',
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          const Text(
+                                            'Providers: ',
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                          Row(
+                                            children: snapshot
+                                                .data!.cityProviders!
+                                                .map((cityProvider) {
+                                              return Text(
+                                                '${cityProvider.providerName!} ',
+                                              );
+                                            }).toList(),
+                                          ),
                                         ],
                                       ),
                                     ],
                                   ),
-                                ),
-                            );
-                          } else { 
-                            return const Text('Press the button to get city details.');
-                          }
-                        },
-                      ),
-
-                ],
+                                ],
+                              ),
+                            ),
+                          );
+                        } else {
+                          return const Text(
+                            'Press the button to get city details.',
+                          );
+                        }
+                      },
+                    ),
+                  ],
+                ),
               ),
             );
           },
