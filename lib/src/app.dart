@@ -1,3 +1,4 @@
+import 'package:emotion/src/features/home/presentation/widgets/home_widget.dart';
 import 'package:flutter/material.dart';
 
 class MyApp extends StatelessWidget {
@@ -8,15 +9,31 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('Home Page'),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        inputDecorationTheme: const InputDecorationTheme(
+          labelStyle: TextStyle(color: Colors.blueAccent),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
+            borderRadius: BorderRadius.all(Radius.circular(15.0)),
+          ),
+          border: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.blueAccent, width: 2.0),
+            borderRadius: BorderRadius.all(Radius.circular(15.0)),
+          ),
+          hoverColor: Colors.blueAccent,
         ),
-        body: const Center(
-          child: Text('Welcome to the Home Page!'),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor:
+                WidgetStateProperty.all<Color>(Colors.blueAccent),
+            foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
+          ),
         ),
       ),
+      title: 'E-Motion',
+      debugShowCheckedModeBanner: false,
+      home: const HomePage(),
     );
   }
 }
