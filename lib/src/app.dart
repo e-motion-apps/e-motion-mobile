@@ -1,5 +1,7 @@
+import 'package:emotion/src/features/home/presentation/bloc/home_bloc.dart';
 import 'package:emotion/src/features/home/presentation/widgets/home_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({
@@ -25,15 +27,17 @@ class MyApp extends StatelessWidget {
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ButtonStyle(
-            backgroundColor:
-                WidgetStateProperty.all<Color>(Colors.blueAccent),
+            backgroundColor: WidgetStateProperty.all<Color>(Colors.blueAccent),
             foregroundColor: WidgetStateProperty.all<Color>(Colors.white),
           ),
         ),
       ),
       title: 'E-Motion',
       debugShowCheckedModeBanner: false,
-      home: const HomePage(),
+      home: BlocProvider(
+        create: (context) => HomeBloc(),
+        child: const HomePage(),
+      ),
     );
   }
 }
