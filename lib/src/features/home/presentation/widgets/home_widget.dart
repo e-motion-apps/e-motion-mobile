@@ -20,6 +20,7 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final AuthSource authSource = AuthSource( client: http.Client());
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         return Scaffold(
@@ -106,7 +107,6 @@ class HomePageState extends State<HomePage> {
                                 TextButton(
                                   child: const Text('Sign In'),
                                   onPressed: () {
-                                    final AuthSource authSource = AuthSource( client: http.Client());
                                     authSource.signInWithEmailAndPassword(
                                       'mobiletest@example.com','password',
                                     );
@@ -192,6 +192,12 @@ class HomePageState extends State<HomePage> {
                       title: const Text('Change Language'),
                       onTap: () {
                         // TODO(Leeoz): Handle Language Change
+                      },
+                    ),
+                    ListTile(
+                      title: const Text('Sign Out'),
+                      onTap: () {
+                        authSource.signOut('token');
                       },
                     ),
                   ],
