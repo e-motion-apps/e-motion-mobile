@@ -21,11 +21,9 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
+        title: Center(
+          child: Row(
           children: [
-            const SizedBox(
-              width: 70,
-            ),
             Image.asset(
               'assets/images/emotion-76.png',
               width: 40,
@@ -35,7 +33,7 @@ class HomePageState extends State<HomePage> {
               width: 8,
             ),
             const Text('E-Motion'),
-          ],
+          ]),
         ),
         leading: Builder(
           builder: (context) => IconButton(
