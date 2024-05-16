@@ -5,7 +5,16 @@ class AuthSource {
   AuthSource({required this.client, this.token});
 
   final http.Client client;
-  String? token;
+  String? token = '';
+
+  Future<String?> setToken($token) async {
+    token = $token;
+    return token;
+  }
+
+  String? getToken() {
+    return token;
+  }
 
   Future<void> signInWithEmailAndPassword(String email, String password) async {
     final response = await client.post(
@@ -22,6 +31,7 @@ class AuthSource {
     } else {
       throw Exception('Failed to sign in status code: ${response.statusCode}');
     }
+    setToken(token);
   }
 
   Future<void> signUpWithEmailAndPassword(String name,String email, String password) async {
@@ -36,6 +46,15 @@ class AuthSource {
 
     if (response.statusCode != 201) {
       throw Exception('Failed to sign up status code: ${response.statusCode}');
+    }
+  }
+
+  bool isSignedInSync($token) {
+    if (token!.isEmpty) {
+      return false;
+    }
+    else {
+      return true;
     }
   }
 

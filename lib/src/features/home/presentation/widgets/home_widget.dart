@@ -23,6 +23,7 @@ class HomePageState extends State<HomePage> {
     final AuthSource authSource = AuthSource(client: http.Client());
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
+        authSource.getToken();
         return Scaffold(
           appBar: AppBar(
             title: Center(
@@ -47,191 +48,226 @@ class HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          drawer: BlocBuilder<HomeBloc, HomeState>(
-            builder: (context, state) {
-              return Drawer(
-                child: ListView(
-                  children: [
-                    ListTile(
-                      title: const Text('Sign In'),
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: const Text('Sign In'),
-                              content: SingleChildScrollView(
-                                child: ListBody(
-                                  children: <Widget>[
-                                    Column(
-                                      children: [
-                                        TextField(
-                                          decoration: const InputDecoration(
-                                            labelText: 'Email',
+          drawer: Drawer(
+            child: ListView(
+              children: [
+                ListTile(
+                  title: const Text('Sign In'),
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return BlocProvider(
+                          create: (context) => HomeBloc(),
+                          child: BlocBuilder<HomeBloc, HomeState>(
+                            builder: (context, state) {
+                              return AlertDialog(
+                                title: const Text('Sign In'),
+                                content: SingleChildScrollView(
+                                  child: ListBody(
+                                    children: <Widget>[
+                                      Column(
+                                        children: [
+                                          TextField(
+                                            decoration: const InputDecoration(
+                                              labelText: 'Email',
+                                            ),
+                                            onChanged: (value) {
+                                              context.read<HomeBloc>().add(
+                                                    EmailChanged(email: value),
+                                                  );
+                                            },
                                           ),
-                                          onChanged: (value) {
-                                            context.read<HomeBloc>().add(
-                                                  EmailChanged(email: value),
-                                                );
-                                          },
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        TextField(
-                                          decoration: const InputDecoration(
-                                            labelText: 'Password',
+                                          const SizedBox(
+                                            height: 10,
                                           ),
-                                          onChanged: (value) {
-                                            context.read<HomeBloc>().add(
-                                                  PasswordChanged(
-                                                    password: value,
+                                          TextField(
+                                            decoration: const InputDecoration(
+                                              labelText: 'Password',
+                                            ),
+                                            onChanged: (value) {
+                                              context.read<HomeBloc>().add(
+                                                    PasswordChanged(
+                                                      password: value,
+                                                    ),
+                                                  );
+                                            },
+                                            obscureText: true,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: const Text('Cancel'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: const Text('Sign In'),
+                                    onPressed: () {
+                                      authSource.signInWithEmailAndPassword(
+                                        state.email,
+                                        state.password,
+                                      );
+                                      Navigator.of(context).pop();
+                                      Navigator.of(context).pop();
+                                      
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: const Text('Sign Up'),
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          return BlocProvider(
+                                            create: (context) => HomeBloc(),
+                                            child: BlocBuilder<HomeBloc,
+                                                HomeState>(
+                                              builder: (context, state) {
+                                                return AlertDialog(
+                                                  title: const Text('Sign Up'),
+                                                  content:
+                                                      SingleChildScrollView(
+                                                    child: ListBody(
+                                                      children: <Widget>[
+                                                        Column(
+                                                          children: [
+                                                            TextField(
+                                                              decoration:
+                                                                  const InputDecoration(
+                                                                labelText:
+                                                                    'Name',
+                                                              ),
+                                                              onChanged: (value) =>
+                                                                  context
+                                                                      .read<
+                                                                          HomeBloc>()
+                                                                      .add(
+                                                                        NameChanged(
+                                                                          name:
+                                                                              value,
+                                                                        ),
+                                                                      ),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 10,
+                                                            ),
+                                                            TextField(
+                                                              decoration:
+                                                                  const InputDecoration(
+                                                                labelText:
+                                                                    'Email',
+                                                              ),
+                                                              onChanged: (value) =>
+                                                                  context
+                                                                      .read<
+                                                                          HomeBloc>()
+                                                                      .add(
+                                                                        EmailChanged(
+                                                                          email:
+                                                                              value,
+                                                                        ),
+                                                                      ),
+                                                            ),
+                                                            const SizedBox(
+                                                              height: 10,
+                                                            ),
+                                                            TextField(
+                                                              decoration:
+                                                                  const InputDecoration(
+                                                                labelText:
+                                                                    'Password',
+                                                              ),
+                                                              onChanged: (value) =>
+                                                                  context
+                                                                      .read<
+                                                                          HomeBloc>()
+                                                                      .add(
+                                                                        PasswordChanged(
+                                                                          password:
+                                                                              value,
+                                                                        ),
+                                                                      ),
+                                                              obscureText: true,
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    ),
                                                   ),
-                                                );
-                                          },
-                                          obscureText: true,
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              actions: <Widget>[
-                                TextButton(
-                                  child: const Text('Cancel'),
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                                TextButton(
-                                  child: const Text('Sign In'),
-                                  onPressed: () {
-                                    authSource.signInWithEmailAndPassword(
-                                      state.email,
-                                      state.password,
-                                    );
-                                    Navigator.of(context).pop();
-                                  },
-                                ),
-                                TextButton(
-                                  child: const Text('Sign Up'),
-                                  onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: const Text('Sign Up'),
-                                          content: SingleChildScrollView(
-                                            child: ListBody(
-                                              children: <Widget>[
-                                                Column(
-                                                  children: [
-                                                    TextField(
-                                                      decoration:
-                                                          const InputDecoration(
-                                                        labelText: 'Name',
-                                                      ),
-                                                      onChanged: (value) =>
-                                                          context
-                                                              .read<HomeBloc>()
-                                                              .add(
-                                                                NameChanged(
-                                                                  name: value,
-                                                                ),
-                                                              ),
+                                                  actions: <Widget>[
+                                                    TextButton(
+                                                      child:
+                                                          const Text('Cancel'),
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
                                                     ),
-                                                    const SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    TextField(
-                                                      decoration:
-                                                          const InputDecoration(
-                                                        labelText: 'Email',
-                                                      ),
-                                                      onChanged: (value) =>
-                                                          context
-                                                              .read<HomeBloc>()
-                                                              .add(
-                                                                EmailChanged(
-                                                                  email: value,
-                                                                ),
-                                                              ),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    TextField(
-                                                      decoration:
-                                                          const InputDecoration(
-                                                        labelText: 'Password',
-                                                      ),
-                                                      onChanged: (value) =>
-                                                          context
-                                                              .read<HomeBloc>()
-                                                              .add(
-                                                                PasswordChanged(
-                                                                  password: value,
-                                                                ),
-                                                              ),
-                                                      obscureText: true,
+                                                    TextButton(
+                                                      child:
+                                                          const Text('Sign Up'),
+                                                      onPressed: () {
+                                                        authSource
+                                                            .signUpWithEmailAndPassword(
+                                                          state.email,
+                                                          state.password,
+                                                          state.name,
+                                                        );
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
                                                     ),
                                                   ],
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          actions: <Widget>[
-                                            TextButton(
-                                              child: const Text('Cancel'),
-                                              onPressed: () {
-                                                Navigator.of(context).pop();
-                                              },
-                                            ),
-                                            TextButton(
-                                              child: const Text('Sign Up'),
-                                              onPressed: () {
-                                                authSource.signUpWithEmailAndPassword(
-                                                  state.email,
-                                                  state.password,
-                                                  state.name,
                                                 );
-                                                Navigator.of(context).pop();
                                               },
                                             ),
-                                          ],
-                                        );
-                                      },
-                                    );
-                                  },
-                                ),
-                              ],
-                            );
-                          },
+                                          );
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
                         );
                       },
-                    ),
-                    ListTile(
-                      title: const Text('Settings'),
-                      onTap: () {
-                        // TODO(Leeoz): Handle Settings
-                      },
-                    ),
-                    ListTile(
-                      title: const Text('Change Language'),
-                      onTap: () {
-                        // TODO(Leeoz): Handle Language Change
-                      },
-                    ),
-                    ListTile(
-                      title: const Text('Sign Out'),
-                      onTap: () {
-                        authSource.signOut('token');
-                      },
-                    ),
-                  ],
+                    );
+                  },
                 ),
-              );
-            },
+                ListTile(
+                  title: const Text('Settings'),
+                  onTap: () {
+                    // TODO(Leeoz): Handle Settings
+                  },
+                ),
+                ListTile(
+                  title: const Text('Change Language'),
+                  onTap: () {
+                    // TODO(Leeoz): Handle Language Change
+                  },
+                ),
+                ListTile(
+                  title: const Text('Sign Out'),
+                  onTap: () {
+                    authSource.signOut(authSource.token!);
+                    if (!authSource.isSignedInSync(authSource.token)) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Signed out successfully.'),
+                        ),
+                      );
+                    }
+                  },
+                ),
+              ],
+            ),
           ),
           body: Builder(
             builder: (context) {
