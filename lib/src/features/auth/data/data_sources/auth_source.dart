@@ -5,11 +5,15 @@ class AuthSource {
   AuthSource({required this.client, this.token});
 
   final http.Client client;
-  String? token = '';
+  String? token = ' ';
 
   Future<String?> setToken($token) async {
     token = $token;
     return token;
+  }
+
+  String getToken() {
+    return token!;
   }
 
   Future<void> signInWithEmailAndPassword(
@@ -31,7 +35,7 @@ class AuthSource {
     }
   }
 
-  Future<void> signUpWithEmailAndPassword(
+  Future<bool> signUpWithEmailAndPassword(
     String name,
     String email,
     String password,
@@ -45,13 +49,15 @@ class AuthSource {
       },
     );
 
-    if (response.statusCode != 201) {
+    if (response.statusCode == 201) {
+      return true;
+    } else {
       throw Exception('Failed to sign up status code: ${response.statusCode}');
     }
   }
 
-  bool isSignedInSync($token) {
-    if (token!.isEmpty) {
+  bool isSignedInSync() {
+    if (token == null) {
       return false;
     } else {
       return true;
@@ -68,14 +74,14 @@ class AuthSource {
     return null;
   }
 
-  Future<void> signOut(String token) async {
+  Future<void> signOut() async {
     await client.post(
       Uri.parse('https://dev.escooters.blumilk.pl/api/logout'),
       headers: {
         'Authorization': 'Bearer $token',
       },
     );
-    token = '';
+    token = null;
   }
 
   AuthSource useToken(String token) {

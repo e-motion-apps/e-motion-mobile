@@ -108,11 +108,22 @@ class HomePageState extends State<HomePage> {
                                   ),
                                   TextButton(
                                     child: const Text('Sign In'),
-                                    onPressed: () {
-                                      authSource.signInWithEmailAndPassword(
+                                    onPressed: () async {
+                                      await authSource
+                                          .signInWithEmailAndPassword(
                                         state.email,
                                         state.password,
                                       );
+                                      if (authSource.isSignedInSync()) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                            content:
+                                                Text('Successful Sign In.'),
+                                            duration: Duration(seconds: 5),
+                                          ),
+                                        );
+                                      }
                                       Navigator.of(context).pop();
                                       Navigator.of(context).pop();
                                     },
@@ -211,15 +222,29 @@ class HomePageState extends State<HomePage> {
                                                     TextButton(
                                                       child:
                                                           const Text('Sign Up'),
-                                                      onPressed: () {
-                                                        authSource
+                                                      onPressed: () async {
+                                                        if (await authSource
                                                             .signUpWithEmailAndPassword(
                                                           state.email,
                                                           state.password,
                                                           state.name,
-                                                        );
-                                                        Navigator.of(context)
-                                                            .pop();
+                                                        )) {
+                                                          ScaffoldMessenger.of(
+                                                            context,
+                                                          ).showSnackBar(
+                                                            const SnackBar(
+                                                              content: Text(
+                                                                'Successful Sign Up.',
+                                                              ),
+                                                              duration:
+                                                                  Duration(
+                                                                seconds: 5,
+                                                              ),
+                                                            ),
+                                                          );
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        }
                                                       },
                                                     ),
                                                   ],
@@ -297,8 +322,8 @@ class HomePageState extends State<HomePage> {
                 ListTile(
                   title: const Text('Sign Out'),
                   onTap: () {
-                    authSource.signOut(authSource.token!);
-                    if (!authSource.isSignedInSync(authSource.token)) {
+                    authSource.signOut();
+                    if (!authSource.isSignedInSync()) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Signed out successfully.'),
@@ -318,9 +343,8 @@ class HomePageState extends State<HomePage> {
                   child: Column(
                     children: [
                       TextField(
-                        decoration: const InputDecoration(
-                          labelText: 'City Name',
-                        ),
+                        decoration:
+                            const InputDecoration(labelText: 'City Name'),
                         onChanged: (value) {
                           context
                               .read<HomeBloc>()

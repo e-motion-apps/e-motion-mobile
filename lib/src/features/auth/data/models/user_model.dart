@@ -15,8 +15,6 @@ class UserModel {
         );
 }
 
-
-
 class Abilities {
   final String abilityName;
   Abilities({required this.abilityName});
