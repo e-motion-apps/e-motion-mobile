@@ -12,11 +12,10 @@ class AuthSource {
     return token;
   }
 
-  String? getToken() {
-    return token;
-  }
-
-  Future<void> signInWithEmailAndPassword(String email, String password) async {
+  Future<void> signInWithEmailAndPassword(
+    String email,
+    String password,
+  ) async {
     final response = await client.post(
       Uri.parse('https://dev.escooters.blumilk.pl/api/login'),
       body: {
@@ -30,10 +29,13 @@ class AuthSource {
     } else {
       throw Exception('Failed to sign in status code: ${response.statusCode}');
     }
-    setToken(token);
   }
 
-  Future<void> signUpWithEmailAndPassword(String name,String email, String password) async {
+  Future<void> signUpWithEmailAndPassword(
+    String name,
+    String email,
+    String password,
+  ) async {
     final response = await client.post(
       Uri.parse('https://dev.escooters.blumilk.pl/api/register'),
       body: {
@@ -51,8 +53,7 @@ class AuthSource {
   bool isSignedInSync($token) {
     if (token!.isEmpty) {
       return false;
-    }
-    else {
+    } else {
       return true;
     }
   }
@@ -75,5 +76,10 @@ class AuthSource {
       },
     );
     token = '';
+  }
+
+  AuthSource useToken(String token) {
+    this.token = token;
+    return this;
   }
 }

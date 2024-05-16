@@ -23,7 +23,6 @@ class HomePageState extends State<HomePage> {
     final AuthSource authSource = AuthSource(client: http.Client());
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
-        authSource.getToken();
         return Scaffold(
           appBar: AppBar(
             title: Center(
