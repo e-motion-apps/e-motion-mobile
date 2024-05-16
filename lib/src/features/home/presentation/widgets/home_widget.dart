@@ -123,6 +123,11 @@ class HomePageState extends State<HomePage> {
                                             duration: Duration(seconds: 5),
                                           ),
                                         );
+                                        context.read<HomeBloc>().add(
+                                              UserLoggedIn(
+                                                isUserLoggedIn: true,
+                                              ),
+                                            );
                                       }
                                       Navigator.of(context).pop();
                                       Navigator.of(context).pop();
@@ -329,6 +334,9 @@ class HomePageState extends State<HomePage> {
                           content: Text('Signed out successfully.'),
                         ),
                       );
+                      context.read<HomeBloc>().add(
+                            UserLoggedIn(isUserLoggedIn: false),
+                          );
                     }
                   },
                 ),

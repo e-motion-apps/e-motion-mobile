@@ -34,7 +34,8 @@ class SignInWithEmailAndPasswordPressed extends HomeEvent {
   final String email;
   final String password;
 
-  SignInWithEmailAndPasswordPressed({required this.email, required this.password});
+  SignInWithEmailAndPasswordPressed(
+      {required this.email, required this.password});
 }
 
 class GetCityDetailsPressed extends HomeEvent {
@@ -42,4 +43,10 @@ class GetCityDetailsPressed extends HomeEvent {
   final String countryName;
 
   GetCityDetailsPressed({required this.cityName, required this.countryName});
+}
+
+class UserLoggedIn extends HomeEvent {
+  bool isUserLoggedIn = false;
+
+  UserLoggedIn({required this.isUserLoggedIn});
 }
