@@ -1,5 +1,6 @@
 import 'package:emotion/src/core/change_language.dart';
 import 'package:emotion/src/features/auth/data/data_sources/auth_source.dart';
+import 'package:emotion/src/features/city_details/data/data_sources/favorite_city_data.dart';
 import 'package:emotion/src/features/city_details/data/data_sources/remote_data_source.dart';
 import 'package:emotion/src/features/city_details/data/models/city_details_model.dart';
 import 'package:emotion/src/features/home/presentation/bloc/home_bloc.dart';
@@ -382,11 +383,34 @@ class HomePageState extends State<HomePage> {
                               CityDetailsRemoteDataSourceImpl(
                             client: http.Client(),
                           );
+                          final FavoriteCityData favoriteCityData =
+                              FavoriteCityData(
+                            client: http.Client(),
+                          );
                           setState(() {
                             futureCityDetails = remoteDataSource.getCityDetails(
                               state.cityName,
                               state.countryName,
                             );
+                            futureCityDetails?.then((value) async {
+                              if (await favoriteCityData.isFavoriteCity(
+                                value.city!.id!,
+                                http.Client(),
+                                authSource.token,
+                              )) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('City is favorite.'),
+                                  ),
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('City is not favorite.'),
+                                  ),
+                                );
+                              }
+                            });
                           });
                         },
                         child: const Text('Get City Details'),
