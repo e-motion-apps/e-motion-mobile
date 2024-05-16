@@ -24,7 +24,6 @@ class AuthSource {
         'password': password,
       },
     );
-    print(response.body);
 
     if (response.statusCode == 200) {
       token = jsonDecode(response.body)['access_token'];
