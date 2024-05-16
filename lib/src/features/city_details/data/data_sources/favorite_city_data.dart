@@ -29,10 +29,9 @@ class FavoriteCityData {
 
   Future<void> addFavoriteCity(int cityId, client, token) async {
     final body = {
-      'city_id': cityId,
+      'city_id': '$cityId',
     };
     final headers = {
-      'Content-Type': 'application/json',
       'Authorization': 'Bearer  $token',
     };
 
