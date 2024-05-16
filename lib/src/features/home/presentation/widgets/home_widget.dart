@@ -1,3 +1,4 @@
+import 'package:emotion/src/core/change_language.dart';
 import 'package:emotion/src/features/auth/data/data_sources/auth_source.dart';
 import 'package:emotion/src/features/city_details/data/data_sources/remote_data_source.dart';
 import 'package:emotion/src/features/city_details/data/models/city_details_model.dart';
@@ -114,7 +115,6 @@ class HomePageState extends State<HomePage> {
                                       );
                                       Navigator.of(context).pop();
                                       Navigator.of(context).pop();
-                                      
                                     },
                                   ),
                                   TextButton(
@@ -247,9 +247,51 @@ class HomePageState extends State<HomePage> {
                   },
                 ),
                 ListTile(
-                  title: const Text('Change Language'),
+                  title: const Text(
+                    'Change Language',
+                  ),
                   onTap: () {
-                    // TODO(Leeoz): Handle Language Change
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Change Language'),
+                          content: SingleChildScrollView(
+                            child: ListBody(
+                              children: <Widget>[
+                                Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            ChangeLanguage(language: 'en')
+                                                .changeLanguage('en');
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text('🇬🇧'),
+                                        ),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            ChangeLanguage(language: 'pl')
+                                                .changeLanguage('pl');
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: const Text('🇵🇱'),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    );
                   },
                 ),
                 ListTile(
