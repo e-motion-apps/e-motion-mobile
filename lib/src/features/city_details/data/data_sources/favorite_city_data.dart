@@ -20,7 +20,7 @@ class FavoriteCityData {
       Uri.parse('https://dev.escooters.blumilk.pl/api/favorites/$cityId'),
       headers: headers,
     );
-    if (response.statusCode == 200) {
+    if (response.body == '1') {
       return true;
     } else {
       return false;
