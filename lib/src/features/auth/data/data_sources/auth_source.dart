@@ -49,7 +49,8 @@ class AuthSource {
         'password': password,
       },
     );
-
+    print(response.body);
+    print(name + ' ' + password + ' ' + email);
     if (response.statusCode == 201) {
       return true;
     } else {
@@ -58,7 +59,7 @@ class AuthSource {
   }
 
   bool isSignedInSync() {
-    if (token == null) {
+    if (token == ' ') {
       return false;
     } else {
       return true;

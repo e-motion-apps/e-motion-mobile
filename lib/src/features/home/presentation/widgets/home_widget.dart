@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  final AuthSource authSource = AuthSource(client: http.Client());
+  final AuthSource authSource = AuthSource(client: http.Client(), token: ' ');
   Future<CityDetailsModel>? futureCityDetails;
   FavoriteCityData favoriteCityData = FavoriteCityData(
     client: http.Client(),
@@ -234,9 +234,9 @@ class HomePageState extends State<HomePage> {
                                                       onPressed: () async {
                                                         if (await authSource
                                                             .signUpWithEmailAndPassword(
+                                                          state.name,
                                                           state.email,
                                                           state.password,
-                                                          state.name,
                                                         )) {
                                                           ScaffoldMessenger.of(
                                                             context,
