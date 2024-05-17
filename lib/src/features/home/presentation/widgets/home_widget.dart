@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
-  final AuthSource authSource = AuthSource(client: http.Client());
+  final AuthSource authSource = AuthSource(client: http.Client(), token: ' ');
   Future<CityDetailsModel>? futureCityDetails;
   FavoriteCityData favoriteCityData = FavoriteCityData(
     client: http.Client(),
@@ -234,9 +234,9 @@ class HomePageState extends State<HomePage> {
                                                       onPressed: () async {
                                                         if (await authSource
                                                             .signUpWithEmailAndPassword(
+                                                          state.name,
                                                           state.email,
                                                           state.password,
-                                                          state.name,
                                                         )) {
                                                           ScaffoldMessenger.of(
                                                             context,
@@ -331,8 +331,8 @@ class HomePageState extends State<HomePage> {
                 ListTile(
                   title: const Text('Sign Out'),
                   onTap: () {
-                    authSource.signOut();
-                    if (!authSource.isSignedInSync()) {
+                    if (authSource.getToken() != ' ') {
+                      authSource.signOut();
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Signed out successfully.'),
@@ -341,7 +341,14 @@ class HomePageState extends State<HomePage> {
                       context.read<HomeBloc>().add(
                             UserLoggedIn(isUserLoggedIn: false),
                           );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('You were not signed in.'),
+                        ),
+                      );
                     }
+                    Navigator.of(context).pop();
                   },
                 ),
               ],
@@ -446,6 +453,8 @@ class HomePageState extends State<HomePage> {
                               return const Text('No city found.');
                             } else if (snapshot.hasData) {
                               return AlertDialog(
+                                backgroundColor: Colors.blue[100],
+                                shadowColor: Colors.blue,
                                 title: const Center(
                                   child: Text('City Details'),
                                 ),

@@ -49,7 +49,6 @@ class AuthSource {
         'password': password,
       },
     );
-
     if (response.statusCode == 201) {
       return true;
     } else {
@@ -58,7 +57,7 @@ class AuthSource {
   }
 
   bool isSignedInSync() {
-    if (token == null) {
+    if (token == ' ') {
       return false;
     } else {
       return true;
@@ -82,7 +81,7 @@ class AuthSource {
         'Authorization': 'Bearer $token',
       },
     );
-    token = null;
+    token = ' ';
   }
 
   AuthSource useToken(String token) {
