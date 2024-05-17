@@ -38,7 +38,6 @@ class FavoriteCityData {
       body: body,
       headers: headers,
     );
-
     if (response.statusCode != 200) {
       throw Exception(
           'Failed to add favorite city status code: ${response.statusCode}',);

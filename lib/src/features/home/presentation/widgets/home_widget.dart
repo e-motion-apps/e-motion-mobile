@@ -18,11 +18,14 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
+  final AuthSource authSource = AuthSource(client: http.Client());
   Future<CityDetailsModel>? futureCityDetails;
+  FavoriteCityData favoriteCityData = FavoriteCityData(
+    client: http.Client(),
+  );
 
   @override
   Widget build(BuildContext context) {
-    final AuthSource authSource = AuthSource(client: http.Client());
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         return Scaffold(
@@ -384,12 +387,9 @@ class HomePageState extends State<HomePage> {
                                 CityDetailsRemoteDataSourceImpl(
                               client: http.Client(),
                             );
-                            final FavoriteCityData favoriteCityData =
-                                FavoriteCityData(
-                              client: http.Client(),
-                            );
                             setState(() {
-                              futureCityDetails = remoteDataSource.getCityDetails(
+                              futureCityDetails =
+                                  remoteDataSource.getCityDetails(
                                 state.cityName,
                                 state.countryName,
                               );
@@ -397,7 +397,7 @@ class HomePageState extends State<HomePage> {
                                 if (await favoriteCityData.isFavoriteCity(
                                   value.city!.id!,
                                   http.Client(),
-                                  authSource.token,
+                                  authSource.getToken(),
                                 )) {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
@@ -419,23 +419,20 @@ class HomePageState extends State<HomePage> {
                         ElevatedButton(
                           onPressed: () {
                             futureCityDetails?.then((value) async {
-                              final FavoriteCityData favoriteCityData =
-                                  FavoriteCityData(
-                                client: http.Client(),
-                              );
-                              await favoriteCityData.addFavoriteCity(
+                              favoriteCityData.addFavoriteCity(
                                 value.city!.id!,
                                 http.Client(),
-                                authSource.token,
+                                authSource.getToken(),
                               );
                               ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(
-                                  content: Text('City added to favorites.'),
+                                  content:
+                                      Text('City favorite status toggled.'),
                                 ),
                               );
                             });
                           },
-                          child: const Text('Add to Favorites'),
+                          child: const Text('Toggle favorite'),
                         ),
                         FutureBuilder(
                           future: futureCityDetails,
