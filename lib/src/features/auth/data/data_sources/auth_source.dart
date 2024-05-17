@@ -82,7 +82,7 @@ class AuthSource {
         'Authorization': 'Bearer $token',
       },
     );
-    token = null;
+    token = ' ';
   }
 
   AuthSource useToken(String token) {

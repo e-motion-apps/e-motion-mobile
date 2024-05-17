@@ -331,8 +331,8 @@ class HomePageState extends State<HomePage> {
                 ListTile(
                   title: const Text('Sign Out'),
                   onTap: () {
-                    authSource.signOut();
-                    if (!authSource.isSignedInSync()) {
+                    if (authSource.getToken() != ' ') {
+                      authSource.signOut();
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
                           content: Text('Signed out successfully.'),
@@ -341,7 +341,14 @@ class HomePageState extends State<HomePage> {
                       context.read<HomeBloc>().add(
                             UserLoggedIn(isUserLoggedIn: false),
                           );
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('You were not signed in.'),
+                        ),
+                      );
                     }
+                    Navigator.of(context).pop();
                   },
                 ),
               ],
