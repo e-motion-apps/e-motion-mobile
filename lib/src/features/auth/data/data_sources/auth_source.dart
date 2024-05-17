@@ -7,8 +7,8 @@ class AuthSource {
   final http.Client client;
   String? token = ' ';
 
-  Future<String?> setToken($token) async {
-    token = $token;
+  Future<String?> setToken(value) async {
+    token = value;
     return token;
   }
 
@@ -33,6 +33,7 @@ class AuthSource {
     } else {
       throw Exception('Failed to sign in status code: ${response.statusCode}');
     }
+    setToken(token);
   }
 
   Future<bool> signUpWithEmailAndPassword(

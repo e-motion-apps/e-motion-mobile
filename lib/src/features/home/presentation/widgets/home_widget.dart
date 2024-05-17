@@ -1,5 +1,6 @@
 import 'package:emotion/src/core/change_language.dart';
 import 'package:emotion/src/features/auth/data/data_sources/auth_source.dart';
+import 'package:emotion/src/features/city_details/data/data_sources/favorite_city_data.dart';
 import 'package:emotion/src/features/city_details/data/data_sources/remote_data_source.dart';
 import 'package:emotion/src/features/city_details/data/models/city_details_model.dart';
 import 'package:emotion/src/features/home/presentation/bloc/home_bloc.dart';
@@ -17,11 +18,14 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
+  final AuthSource authSource = AuthSource(client: http.Client());
   Future<CityDetailsModel>? futureCityDetails;
+  FavoriteCityData favoriteCityData = FavoriteCityData(
+    client: http.Client(),
+  );
 
   @override
   Widget build(BuildContext context) {
-    final AuthSource authSource = AuthSource(client: http.Client());
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         return Scaffold(
@@ -343,137 +347,177 @@ class HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          body: Builder(
-            builder: (context) {
-              return Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: [
-                      TextField(
-                        decoration:
-                            const InputDecoration(labelText: 'City Name'),
-                        onChanged: (value) {
-                          context
-                              .read<HomeBloc>()
-                              .add(CityNameChanged(cityName: value));
-                        },
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TextField(
-                        decoration: const InputDecoration(
-                          labelText: 'Country Name',
+          body: SingleChildScrollView(
+            child: Builder(
+              builder: (context) {
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: [
+                        TextField(
+                          decoration:
+                              const InputDecoration(labelText: 'City Name'),
+                          onChanged: (value) {
+                            context
+                                .read<HomeBloc>()
+                                .add(CityNameChanged(cityName: value));
+                          },
                         ),
-                        onChanged: (value) {
-                          context
-                              .read<HomeBloc>()
-                              .add(CountryNameChanged(countryName: value));
-                        },
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      ElevatedButton(
-                        onPressed: () async {
-                          final CityDetailsRemoteDataSourceImpl
-                              remoteDataSource =
-                              CityDetailsRemoteDataSourceImpl(
-                            client: http.Client(),
-                          );
-                          setState(() {
-                            futureCityDetails = remoteDataSource.getCityDetails(
-                              state.cityName,
-                              state.countryName,
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        TextField(
+                          decoration: const InputDecoration(
+                            labelText: 'Country Name',
+                          ),
+                          onChanged: (value) {
+                            context
+                                .read<HomeBloc>()
+                                .add(CountryNameChanged(countryName: value));
+                          },
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        ElevatedButton(
+                          onPressed: () async {
+                            final CityDetailsRemoteDataSourceImpl
+                                remoteDataSource =
+                                CityDetailsRemoteDataSourceImpl(
+                              client: http.Client(),
                             );
-                          });
-                        },
-                        child: const Text('Get City Details'),
-                      ),
-                      FutureBuilder(
-                        future: futureCityDetails,
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const CircularProgressIndicator(
-                              color: Colors.blue,
-                            );
-                          } else if (snapshot.hasError) {
-                            return const Text('No city found.');
-                          } else if (snapshot.hasData) {
-                            return AlertDialog(
-                              title: const Center(
-                                child: Text('City Details'),
-                              ),
-                              content: SingleChildScrollView(
-                                child: ListBody(
-                                  children: <Widget>[
-                                    Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            const Text(
-                                              'City: ',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            Text(
-                                              '${snapshot.data!.city!.name}',
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Text(
-                                              'Country: ',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            Text(
-                                              '${snapshot.data!.country!.name}',
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            const Text(
-                                              'Providers: ',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            Row(
-                                              children: snapshot
-                                                  .data!.cityProviders!
-                                                  .map((cityProvider) {
-                                                return Text(
-                                                  '${cityProvider.providerName!} ',
-                                                );
-                                              }).toList(),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                            setState(() {
+                              futureCityDetails =
+                                  remoteDataSource.getCityDetails(
+                                state.cityName,
+                                state.countryName,
+                              );
+                              futureCityDetails?.then((value) async {
+                                if (await favoriteCityData.isFavoriteCity(
+                                  value.city!.id!,
+                                  http.Client(),
+                                  authSource.getToken(),
+                                )) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('City is favorite.'),
                                     ),
-                                  ],
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text('City is not favorite.'),
+                                    ),
+                                  );
+                                }
+                              });
+                            });
+                          },
+                          child: const Text('Get City Details'),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            futureCityDetails?.then((value) async {
+                              favoriteCityData.addFavoriteCity(
+                                value.city!.id!,
+                                http.Client(),
+                                authSource.getToken(),
+                              );
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content:
+                                      Text('City favorite status toggled.'),
                                 ),
-                              ),
-                            );
-                          } else {
-                            return const Text(
-                              'Press the button to get city details.',
-                            );
-                          }
-                        },
-                      ),
-                    ],
+                              );
+                            });
+                          },
+                          child: const Text('Toggle favorite'),
+                        ),
+                        FutureBuilder(
+                          future: futureCityDetails,
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const CircularProgressIndicator(
+                                color: Colors.blue,
+                              );
+                            } else if (snapshot.hasError) {
+                              return const Text('No city found.');
+                            } else if (snapshot.hasData) {
+                              return AlertDialog(
+                                title: const Center(
+                                  child: Text('City Details'),
+                                ),
+                                content: SingleChildScrollView(
+                                  child: ListBody(
+                                    children: <Widget>[
+                                      Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              const Text(
+                                                'City: ',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                '${snapshot.data!.city!.name}',
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              const Text(
+                                                'Country: ',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                '${snapshot.data!.country!.name}',
+                                              ),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              const Text(
+                                                'Providers: ',
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Row(
+                                                children: snapshot
+                                                    .data!.cityProviders!
+                                                    .map((cityProvider) {
+                                                  return Text(
+                                                    '${cityProvider.providerName!} ',
+                                                  );
+                                                }).toList(),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            } else {
+                              return const Text(
+                                'Press the button to get city details.',
+                              );
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         );
       },
