@@ -446,6 +446,8 @@ class HomePageState extends State<HomePage> {
                               return const Text('No city found.');
                             } else if (snapshot.hasData) {
                               return AlertDialog(
+                                backgroundColor: Colors.blue[100],
+                                shadowColor: Colors.blue,
                                 title: const Center(
                                   child: Text('City Details'),
                                 ),
