@@ -28,22 +28,20 @@ class FavoriteCityData {
   }
 
   Future<void> addFavoriteCity(int cityId, client, token) async {
-    final body = {
-      'city_id': '$cityId',
-    };
+    final body = '{"city_id": $cityId}';
     final headers = {
-      'Authorization': 'Bearer  $token',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer $token',
     };
-
     final response = await client.post(
       Uri.parse('https://dev.escooters.blumilk.pl/api/favorites'),
       body: body,
       headers: headers,
     );
-    if (response.statusCode != 201) {
+
+    if (response.statusCode != 200) {
       throw Exception(
-        'Failed to add favorite city status code: ${response.statusCode}',
-      );
+          'Failed to add favorite city status code: ${response.statusCode}');
     }
   }
 }
