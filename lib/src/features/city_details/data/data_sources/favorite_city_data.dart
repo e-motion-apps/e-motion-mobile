@@ -41,7 +41,7 @@ class FavoriteCityData {
 
     if (response.statusCode != 200) {
       throw Exception(
-          'Failed to add favorite city status code: ${response.statusCode}');
+          'Failed to add favorite city status code: ${response.statusCode}',);
     }
   }
 }
