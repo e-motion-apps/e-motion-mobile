@@ -56,11 +56,16 @@ class ListCitiesWidget extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   final city = response.cities[index];
                   return ListTile(
-                    title: Text(city.name),
-                    subtitle: Text(city.country.name),
-                    trailing: Text(
-                      'Providers available: ${city.cityProviders.length}',
+                    title: Text(
+                      city.name,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
+                    subtitle: Text(city.country.name),
+                    trailing: Text(city.cityProviders
+                        .map((providers) => providers.providerName)
+                        .join(', ')),
                   );
                 },
               );
