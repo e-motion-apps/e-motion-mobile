@@ -275,9 +275,22 @@ class HomePageState extends State<HomePage> {
                   },
                 ),
                 ListTile(
-                  title: const Text('Settings'),
+                  title: const Text('View all cities'),
                   onTap: () {
-                    // TODO(Leeoz): Handle Settings
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Scaffold(
+                          appBar: AppBar(
+                            title: const Text('All Cities'),
+                          ),
+                          body: const Center(
+                            child: Text('All Cities'),
+                          ),
+                        ),
+                      ),
+                    );
+                    // TODO(Leeoz): Handle all cities list
                   },
                 ),
                 ListTile(
