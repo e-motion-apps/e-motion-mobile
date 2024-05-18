@@ -41,8 +41,10 @@ class CitySearchDelegate extends SearchDelegate {
 
   Widget _buildCityList() {
     final results = cities
-        ?.where((city) =>
-            city.name?.toLowerCase().contains(query.toLowerCase()) ?? false,)
+        ?.where(
+          (city) =>
+              city.name?.toLowerCase().contains(query.toLowerCase()) ?? false,
+        )
         .toList();
 
     return ListView.builder(
@@ -52,7 +54,11 @@ class CitySearchDelegate extends SearchDelegate {
         return ListTile(
           title: Text(city?.name ?? ''),
           subtitle: Text(city?.country?.name ?? ''),
-          trailing: Text('Providers available: ${city?.cityProviders?.length}'),
+          trailing: Text(
+            city!.cityProviders!
+                .map((providers) => providers.providerName)
+                .join(', '),
+          ),
         );
       },
     );
