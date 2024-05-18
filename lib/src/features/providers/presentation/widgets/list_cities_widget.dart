@@ -63,9 +63,11 @@ class ListCitiesWidget extends StatelessWidget {
                       ),
                     ),
                     subtitle: Text(city.country.name),
-                    trailing: Text(city.cityProviders
-                        .map((providers) => providers.providerName)
-                        .join(', ')),
+                    trailing: Text(
+                      city.cityProviders
+                          .map((providers) => providers.providerName)
+                          .join(', '),
+                    ),
                   );
                 },
               );
