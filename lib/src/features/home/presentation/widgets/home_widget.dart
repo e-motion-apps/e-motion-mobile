@@ -286,7 +286,6 @@ class HomePageState extends State<HomePage> {
                         ),
                       ),
                     );
-                    // TODO(Leeoz): Handle all cities list
                   },
                 ),
                 ListTile(
