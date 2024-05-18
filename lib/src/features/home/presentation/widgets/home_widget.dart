@@ -6,6 +6,7 @@ import 'package:emotion/src/features/city_details/data/models/city_details_model
 import 'package:emotion/src/features/home/presentation/bloc/home_bloc.dart';
 import 'package:emotion/src/features/home/presentation/bloc/home_event.dart';
 import 'package:emotion/src/features/home/presentation/bloc/home_state.dart';
+import 'package:emotion/src/features/providers/presentation/widgets/list_cities_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:http/http.dart' as http;
@@ -280,13 +281,8 @@ class HomePageState extends State<HomePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Scaffold(
-                          appBar: AppBar(
-                            title: const Text('All Cities'),
-                          ),
-                          body: const Center(
-                            child: Text('All Cities'),
-                          ),
+                        builder: (context) => const ListCitiesWidget(
+                          key: Key('listCitiesWidget'),
                         ),
                       ),
                     );
