@@ -276,7 +276,7 @@ class HomePageState extends State<HomePage> {
                   },
                 ),
                 ListTile(
-                  title: const Text('View all cities'),
+                  title: const Text('View All Cities'),
                   onTap: () {
                     Navigator.push(
                       context,
